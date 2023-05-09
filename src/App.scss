@@ -1,63 +1,26 @@
 $backgroundColor: #f5f5f5;
 
-html,
-body {
-  height: 100%;
-  margin: 2em;
-  padding: 0;
-  margin-bottom: 4em;
-}
 
-body {
-  background: $backgroundColor;
-  height: 100%;
-  width: 100%;
-  display: inline;
+
+
 
   #root {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
-
-  div {
+  .textboxHolder {
     display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    font-size: 20px;
-    width:70vw;
-
-
-
-    .startButton {
-        padding: 5px;
-        width:fit-content;
-        cursor: pointer;
-        margin-bottom: 3em;
-        
+    align-items: center;
     
-    }
-    .startButton:hover {
-        background-color:aquamarine;
-    }
-
-    button {
-        padding: 5px;
-        width:fit-content;
-        font-size: 20px;
-        margin-top: 1em;
-    }
-    button:hover {
-        background-color:aquamarine;
-        cursor: pointer;
-    }
-    img {
-       width:70vw;
-    }
-    .choices {
-        display: flex;
-        flex-direction: row;
-justify-content: center;        gap:20px;
-    }
   }
-}
+  .textbox {
+    
+    width: 50%;
+    
+  }
+
+
+
+
+    

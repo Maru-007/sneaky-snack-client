@@ -4,7 +4,9 @@ import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
-
+// import Typewriter from "typewriter-effect";
+// import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -46,7 +48,7 @@ const App = () => {
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
       setChoices(question.choices);
-      console.log(question);
+      console.log(question); 
       console.log(question.choices);
     });
 
@@ -102,10 +104,17 @@ const App = () => {
           />
         )}
 
-        {message}
+        
         <br></br>
+        
+        <div className="textboxHolder">
+          <Paper className='textbox'elevation={3} align='center'>{question.message}</Paper>
+        </div>
         <br></br>
-        {question.message}
+        <div className="textboxHolder">
+          <Paper className='textbox'elevation={3} align='center'>{message}</Paper>
+        </div>
+        
 
         <div className="choices">
           {choices &&
