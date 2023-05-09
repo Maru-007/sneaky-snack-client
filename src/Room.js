@@ -1,6 +1,6 @@
 import React from "react";
 
-const Room = ({ currentRoom, handleDoorClick, choices, handleChoice }) => {
+const Room = ({ currentRoom }) => {
   const backgroundUrl = `url(/${currentRoom}.png)`;
 
   return (
