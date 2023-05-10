@@ -30,6 +30,7 @@ const App = () => {
   const [displayRoom, setDisplayRoom] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [doorSound, setDoorSound] = useState(false);
 
   useEffect(() => {
     function handleConnect() {
@@ -82,16 +83,25 @@ const App = () => {
     setViewBanner(false);
     setDisplayRoom(true);
 
-    if (rooms.includes(choice)) setCurrentRoom(choice);
+    if (rooms.includes(choice)) {
+      setCurrentRoom(choice);
+      setDoorSound(true);
+    }
     console.log(currentRoom);
   };
 
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
-      <button onClick={() => setIsPlaying(!isPlaying)}>{!isPlaying ? 'play music' : 'stop music'}</button>
+
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "play music" : "stop music"}
+      </button>
+
       <br></br>
-      {isPlaying && <PlaySound isPlaying={isPlaying} />}
+
+      {isPlaying && <PlaySound isPlaying={isPlaying} doorSound={doorSound} />}
+
       {viewBanner && (
         <>
           <img src={bannerImage} alt="banner" />
