@@ -28,6 +28,7 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
+
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -88,7 +89,9 @@ const App = () => {
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
+      <button onClick={() => setIsPlaying(!isPlaying)}>{!isPlaying ? 'play music' : 'stop music'}</button>
       <br></br>
+      {isPlaying && <PlaySound isPlaying={isPlaying} />}
       {viewBanner && (
         <>
           <img src={bannerImage} alt="banner" />
@@ -98,7 +101,6 @@ const App = () => {
           </button>
         </>
       )}
-      {isPlaying && <PlaySound isPlaying={isPlaying} />}
 
       <div>
         {displayRoom && (

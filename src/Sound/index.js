@@ -8,6 +8,7 @@ const PlaySound = (isPlaying) => {
             <Sound 
                 url={background}
                 playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
+                loop={true}
             />
         </div>
     )
