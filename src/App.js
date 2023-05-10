@@ -4,10 +4,10 @@ import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
-import TypingComponent from './Typewriter'
-import Button from '@mui/material/Button';
+// import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import { sfx } from "./audio/audio";
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -68,7 +68,10 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
+    sfx.background.play();
   };
+
+
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -80,25 +83,18 @@ const App = () => {
     if (rooms.includes(choice)) setCurrentRoom(choice);
     console.log(currentRoom);
   };
-  
- 
+
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
       <br></br>
       {viewBanner && (
         <>
-          <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
-          </div>
-          
+          <img src={bannerImage} alt="banner" />
           <br></br>
-          <div className="startbtn">
-            <button className="choiceButton" onClick={handleReady}>
-              Start
-            </button>
-          </div>
-          
+          <button className="startButton" onClick={handleReady}>
+            Start new game
+          </button>
         </>
       )}
 
@@ -115,22 +111,13 @@ const App = () => {
         
         <br></br>
         
-        
         <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='left'>
-          
-            <TypingComponent question={question.message}></TypingComponent>
-            
-          
-            
-          </Paper>
+          <Paper className='textbox'elevation={3} align='center'>{question.message}</Paper>
         </div>
         <br></br>
-        {/* <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='left'>
-            <TypingComponent question={message}></TypingComponent>
-          </Paper>
-        </div> */}
+        <div className="textboxHolder">
+          <Paper className='textbox'elevation={3} align='center'>{message}</Paper>
+        </div>
         
 
         <div className="choices">
@@ -139,10 +126,7 @@ const App = () => {
               <button
                 key={choice}
                 value={choice}
-                className="choiceButton"
-                variant="contained"
                 onClick={(e) => handleChoice(choice)}
-                
               >
                 {choice}
               </button>
