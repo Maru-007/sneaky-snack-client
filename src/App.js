@@ -4,7 +4,8 @@ import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
-// import Typewriter from "typewriter-effect";
+import TypingComponent from './Typewriter'
+import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 const rooms = [
@@ -79,18 +80,25 @@ const App = () => {
     if (rooms.includes(choice)) setCurrentRoom(choice);
     console.log(currentRoom);
   };
-
+  
+ 
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
       <br></br>
       {viewBanner && (
         <>
-          <img src={bannerImage} alt="banner" />
+          <div className="banner">
+            <img  src={bannerImage} alt="banner" /> 
+          </div>
+          
           <br></br>
-          <button className="startButton" onClick={handleReady}>
-            Start new game
-          </button>
+          <div className="startbtn">
+            <button className="choiceButton" onClick={handleReady}>
+              Start
+            </button>
+          </div>
+          
         </>
       )}
 
@@ -107,13 +115,22 @@ const App = () => {
         
         <br></br>
         
+        
         <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='center'>{question.message}</Paper>
+          <Paper className='textbox'elevation={3} align='left'>
+          
+            <TypingComponent question={question.message}></TypingComponent>
+            
+          
+            
+          </Paper>
         </div>
         <br></br>
-        <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='center'>{message}</Paper>
-        </div>
+        {/* <div className="textboxHolder">
+          <Paper className='textbox'elevation={3} align='left'>
+            <TypingComponent question={message}></TypingComponent>
+          </Paper>
+        </div> */}
         
 
         <div className="choices">
@@ -122,7 +139,10 @@ const App = () => {
               <button
                 key={choice}
                 value={choice}
+                className="choiceButton"
+                variant="contained"
                 onClick={(e) => handleChoice(choice)}
+                
               >
                 {choice}
               </button>
