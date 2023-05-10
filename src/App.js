@@ -6,7 +6,10 @@ import bannerImage from "./Banner.png";
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
+
+import PlaySound from "./Sound";
+
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -25,6 +28,7 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     function handleConnect() {
@@ -48,7 +52,7 @@ const App = () => {
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
       setChoices(question.choices);
-      console.log(question); 
+      console.log(question);
       console.log(question.choices);
     });
 
@@ -67,6 +71,7 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
+    setIsPlaying(true);
   };
 
   const handleChoice = (choice) => {
@@ -93,9 +98,9 @@ const App = () => {
           </button>
         </>
       )}
+      {isPlaying && <PlaySound isPlaying={isPlaying} />}
 
       <div>
-
         {displayRoom && (
           <Room
             currentRoom={currentRoom}
@@ -104,17 +109,19 @@ const App = () => {
           />
         )}
 
-        
         <br></br>
-        
+
         <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='center'>{question.message}</Paper>
+          <Paper className="textbox" elevation={3} align="center">
+            {question.message}
+          </Paper>
         </div>
         <br></br>
         <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='center'>{message}</Paper>
+          <Paper className="textbox" elevation={3} align="center">
+            {message}
+          </Paper>
         </div>
-        
 
         <div className="choices">
           {choices &&
