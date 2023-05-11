@@ -7,6 +7,7 @@ const Room = ({ currentRoom }) => {
     <div
       className="room"
       style={{
+        borderRadius: "30px",
         position: "relative",
         height: "600px",
         backgroundImage: backgroundUrl,

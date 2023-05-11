@@ -8,7 +8,8 @@
 // #ffffff - White
 
   body {
-     background-color: white;
+     background-color:rgb(23, 97, 32);
+     background-image: url("./assets/cookie-stack.jpeg");
   }
   #root {
     display: flex;
@@ -16,6 +17,7 @@
     height: 100%;
   }
   .banner > img {
+    border-radius: 30px;
     display: flex;
     margin: auto;
     width: 60%;
@@ -25,7 +27,7 @@
     justify-content: center;
   }
   .textbox {
-    width: 50%;
+    width: 35%;
   }
   .choices, .startbtn {
     display: flex;
