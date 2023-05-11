@@ -6,29 +6,45 @@ const roomInfo = {
       {
         alt: "bathroom",
         title: "bathroom",
-        coords: "445,147,621,354",
+        coords: "380,110,535,300",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "801,147,976,353",
+        coords: "680,110,835,300",
         shape: "rect",
       },
     ],
+  },
+  parentsroom: {
+    areas: [
+      {
+        title: "bathroom",
+        alt: "bathroom",
+        coords: "370,110,520,300",
+        shape: "rect"
+      },
+      {
+        title: "hallway",
+        alt: "hallway",
+        coords: "670,110,820,300",
+        shape: "rect"
+      }
+    ]
   },
   kitchen: {
     areas: [
       {
         alt: "livingroom",
         title: "livingroom",
-        coords: "1,131,135,322",
+        coords: "1,120,130,300",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "832,133,968,321",
+        coords: "770,120,960,300",
         shape: "rect",
       },
     ],
@@ -38,18 +54,83 @@ const roomInfo = {
       {
         alt: "kitchen",
         title: "kitchen",
-        coords: "3,142,133,322",
+        coords: "780,130,950,300",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "834,141,966,322",
+        coords: "-1,130,130,300",
         shape: "rect",
       },
     ],
   },
-  // add more rooms here
+  hallway: {
+    areas: [
+      {
+        title: "kitchen",
+        alt: "kitchen",
+        coords: "60,65,130,200",
+        shape: "rect"
+      },
+      {
+        title: "livingroom",
+        alt: "livingroom",
+        coords: "190,65,260,200",
+        shape: "rect"
+      },
+      {
+        title: "parentsroom",
+        alt: "parentsroom",
+        coords: "320,65,390,200",
+        shape: "rect"
+      },
+      {
+        title: "bathroom",
+        alt: "bathroom",
+        coords: "520,65,590,200",
+        shape: "rect"
+      },
+      {
+        title: "kidsroom",
+        alt: "kidsroom",
+        coords: "650,65,720,200",
+        shape: "rect"
+      },
+      {
+        title: "garage",
+        alt: "garage",
+        coords: "780,65,850,200",
+        shape: "rect"
+      }
+    ]
+  },
+  garage: {
+    areas: [
+      {
+        title: "hallway",
+        alt: "hallway",
+        coords: "670,120,830,310",
+        shape: "rect"
+      }
+    ]
+  },
+  bathroom: {
+    areas: [
+      {
+        title: "parentsroom",
+        alt: "parentsroom",
+        coords: "470,120,640,300",
+        shape: "rect"
+      },
+      {
+        title: "kidsroom",
+        alt: "kidsroom",
+        coords: "780,120,960,300",
+        shape: "rect"
+      }
+    ]
+  }
 };
 
 const Room = ({ currentRoom, handleNav }) => {
@@ -58,7 +139,8 @@ const Room = ({ currentRoom, handleNav }) => {
 
   return (
     <>
-      <img src={room} usemap="#image-map" alt={currentRoom}/>
+    <div className="roomimages">
+      <img src={room} usemap="#image-map" alt={currentRoom} className="rooms"/>
 
       <map name="image-map">
         {areas.map((area) => (
@@ -72,6 +154,7 @@ const Room = ({ currentRoom, handleNav }) => {
           />
         ))}
       </map>
+      </div>
     </>
   );
 };

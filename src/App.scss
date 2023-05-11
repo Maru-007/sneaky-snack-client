@@ -8,8 +8,8 @@
 // #ffffff - White
 
   body {
-     background-color:rgb(23, 97, 32);
-     background-image: url("./assets/cookie-stack.jpeg");
+     background-color:rgb(194, 157, 210);
+     cursor: url('./assets/cookie.png'), auto;
   }
   #root {
     display: flex;
@@ -29,6 +29,7 @@
   }
   .textbox {
     width: 40%;
+    font-size: 20px;
   }
   .choices, .startbtn {
     display: flex;
@@ -37,9 +38,10 @@
   }
   .choiceButton {
     border-color: #ffffff00;
-    border-radius: 100px;
-    width: 5rem;
-    height: 2rem;
+    border-radius: 40px;
+    width: 7rem;
+    height: 3rem;
+    font-size: 15px;
     background-color: #ff9100;
     &:hover {
       cursor: pointer;
@@ -47,7 +49,20 @@
     }
   }
 
+  .roomimages {
+    display: flex;
+    justify-content: center;
+  }
 
+  .rooms {
+    width: 60%;
+    border-radius: 30px;
+  }
 
+  area:hover {
+    cursor: url('./assets/cookie.png'), pointer;
+  }
+
+  // https://custom-cursor.com/en/collection/cute-cursors/cute-milk-and-cookie
 
     
