@@ -86,6 +86,8 @@ const App = () => {
     if (rooms.includes(choice)) {
       setCurrentRoom(choice);
       setDoorSound(true);
+    } else {
+      setDoorSound(false);
     }
     console.log(currentRoom);
   };
@@ -100,7 +102,7 @@ const App = () => {
 
       <br></br>
 
-      {isPlaying && <PlaySound isPlaying={isPlaying} doorSound={doorSound} />}
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
 
       {viewBanner && (
         <>
