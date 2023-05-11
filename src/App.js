@@ -80,6 +80,12 @@ const App = () => {
     if (rooms.includes(choice)) setCurrentRoom(choice);
     console.log(currentRoom);
   };
+
+  const handleNav = (room) => {
+    socket.emit(EVENT_NAMES.selection, room);
+    setCurrentRoom(room);
+    console.log(room);
+  }
   
  
   return (
@@ -109,6 +115,7 @@ const App = () => {
             currentRoom={currentRoom}
             handleChoice={handleChoice}
             rooms={rooms}
+            handleNav={handleNav}
           />
         )}
 

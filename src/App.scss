@@ -13,6 +13,7 @@
   }
   #root {
     display: flex;
+    font: 0.9rem sans-serif;
     flex-direction: column;
     height: 100%;
   }
@@ -27,7 +28,7 @@
     justify-content: center;
   }
   .textbox {
-    width: 35%;
+    width: 40%;
   }
   .choices, .startbtn {
     display: flex;
