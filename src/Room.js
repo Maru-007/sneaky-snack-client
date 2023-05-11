@@ -9,7 +9,7 @@ const Room = ({ currentRoom }) => {
       style={{
         borderRadius: "30px",
         position: "relative",
-        height: "600px",
+        height: "400px",
         backgroundImage: backgroundUrl,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
