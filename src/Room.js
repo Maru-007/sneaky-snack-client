@@ -8,7 +8,7 @@ const Room = ({ currentRoom }) => {
       className="room"
       style={{
         position: "relative",
-        height: "600px",
+        height: "400px",
         backgroundImage: backgroundUrl,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
