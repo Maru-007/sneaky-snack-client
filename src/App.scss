@@ -27,9 +27,12 @@
     display: flex;
     justify-content: center;
   }
+
   .textbox {
     width: 40%;
     font-size: 20px;
+    padding: 10px;
+
   }
   .choices, .startbtn {
     display: flex;
@@ -61,18 +64,35 @@
     z-index: 1;
     bottom: 0px;
     left: 45%;
-    
+    height: 60%;
   }
 
   .rooms {
     width: 60%;
     border-radius: 30px;
+    height: 60vh;
   }
 
   area:hover {
     cursor: url('./assets/cookie.png'), pointer;
   }
-
   // https://custom-cursor.com/en/collection/cute-cursors/cute-milk-and-cookie
+
+  @media screen and (max-width: 1000px) {
+    .rooms {
+      width: 80%;
+    }
+    .textbox {
+      width: 60%;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .rooms {
+      width: 99%;
+      height: 50vh;
+    }
+  }
+  
 
     
