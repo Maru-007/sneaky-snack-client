@@ -26,7 +26,7 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
-
+  const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
   useEffect(() => {
     function handleConnect() {
       setIsConnected(true);
@@ -68,6 +68,7 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
+    setIsStartButtonClicked(true);
   };
 
   const handleChoice = (choice) => {
@@ -93,11 +94,13 @@ const App = () => {
           </div>
           
           <br></br>
-          <div className="startbtn">
-            <button className="choiceButton" onClick={handleReady}>
-              Start
-            </button>
-          </div>
+          {!isStartButtonClicked && (
+            <div className="startbtn">
+              <button className="choiceButton" onClick={handleReady}>
+                Start
+              </button>
+            </div>
+          )}
           
         </>
       )}
@@ -118,19 +121,30 @@ const App = () => {
         
         <div className="textboxHolder">
           <Paper className='textbox'elevation={3} align='left'>
-          
-            <TypingComponent question={question.message}></TypingComponent>
+            {
+              question.message ? 
+              <TypingComponent question={question.message}></TypingComponent>
+              :
+              <></>
+
+            }
+          </Paper>
+        </div>
+        <br></br>
+        <div className="textboxHolder">
+          <Paper className='textbox'elevation={3} align='left'>
+            {
+              message? 
+              <TypingComponent question={message}></TypingComponent>
+              :
+              <></>
+
+            }
             
           
             
           </Paper>
         </div>
-        <br></br>
-        {/* <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='left'>
-            <TypingComponent question={message}></TypingComponent>
-          </Paper>
-        </div> */}
         
 
         <div className="choices">
