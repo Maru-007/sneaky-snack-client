@@ -7,92 +7,127 @@
 // #fff3d1 - Cream
 // #ffffff - White
 
-  body {
-     background-color:rgb(194, 157, 210);
-     cursor: url('./assets/cookie.png'), auto;
-  }
-  #root {
-    display: flex;
-    font: 0.9rem sans-serif;
-    flex-direction: column;
-    height: 100%;
-  }
-  .banner > img {
-    border-radius: 30px;
-    display: flex;
-    margin: auto;
-    width: 60%;
-  }
-  .textboxHolder {
-    display: flex;
-    justify-content: center;
-  }
+body {
+  background-color: rgb(194, 157, 210);
+  cursor: url("./assets/cookie.png"), auto;
+}
+#root {
+  display: flex;
+  font: 0.9rem sans-serif;
+  flex-direction: column;
+  height: 100%;
+}
+.banner > img {
+  border-radius: 30px;
+  display: flex;
+  margin: auto;
+  width: 60%;
+}
+.textboxHolder {
+  display: flex;
+  justify-content: center;
+}
 
-  .textbox {
-    width: 40%;
-    font-size: 20px;
-    padding: 10px;
+.textbox {
+  width: 40%;
+  font-size: 20px;
+  padding: 10px;
+}
+.choices,
+.startbtn {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.choiceButton {
+  border-color: #ffffff00;
+  border-radius: 40px;
+  width: 7rem;
+  height: 2rem;
+  font-size: 15px;
+  background-color: #eec50f;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(255, 145, 0, 0.744);
+  }
+}
 
-  }
-  .choices, .startbtn {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .choiceButton {
-    border-color: #ffffff00;
-    border-radius: 40px;
-    width: 7rem;
-    height: 2rem;
-    font-size: 15px;
-    background-color: #eec50f;
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(255, 145, 0, 0.744);
-    }
-  }
+.roomimages {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 2em;
+}
 
-  .roomimages {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 2em;
-  }
+.rooms {
+  width: 60%;
+  border-radius: 30px;
+  height: 60vh;
+}
 
-  .sprite {
-    position: absolute;
-    z-index: 1;
-    bottom: 0px;
-    left: 45%;
-    height: 60%;
-  }
+area:hover {
+  cursor: url("./assets/cookie.png"), pointer;
+}
+// https://custom-cursor.com/en/collection/cute-cursors/cute-milk-and-cookie
 
+.sprite {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 45%;
+  height: 60%;
+  // animation: sprite-move 5s linear infinite; 
+  // animation: walk .5s alternate infinite;
+
+  transform-origin: center;
+}
+
+@keyframes sprite-move {
+  0% {
+    bottom: 0;
+    transform: scale(1);
+  }
+  50% {
+    bottom: 15%;
+    left:55%;
+    transform: scale(0.6);
+  }
+  100% {
+    bottom: 15%;
+    left:55%;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes walk {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@media screen and (max-width: 1000px) {
   .rooms {
+    width: 80%;
+  }
+  .textbox {
     width: 60%;
-    border-radius: 30px;
-    height: 60vh;
   }
+}
 
-  area:hover {
-    cursor: url('./assets/cookie.png'), pointer;
+@media screen and (max-width: 425px) {
+  .rooms {
+    width: 99%;
+    height: 50vh;
   }
-  // https://custom-cursor.com/en/collection/cute-cursors/cute-milk-and-cookie
-
-  @media screen and (max-width: 1000px) {
-    .rooms {
-      width: 80%;
-    }
-    .textbox {
-      width: 60%;
-    }
+  .textbox {
+    width: 90%;
   }
+}
 
-  @media screen and (max-width: 425px) {
-    .rooms {
-      width: 99%;
-      height: 50vh;
-    }
-  }
-  
 
-    
