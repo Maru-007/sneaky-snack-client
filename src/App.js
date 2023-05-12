@@ -4,10 +4,10 @@ import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
-import TypingComponent from './Typewriter'
-import Button from '@mui/material/Button';
+// import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import { sfx } from "./audio/audio";
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -68,8 +68,12 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
+
     setIsStartButtonClicked(true);
+
   };
+
+
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -81,19 +85,16 @@ const App = () => {
     if (rooms.includes(choice)) setCurrentRoom(choice);
     console.log(currentRoom);
   };
-  
- 
+
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
       <br></br>
       {viewBanner && (
         <>
-          <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
-          </div>
-          
+          <img src={bannerImage} alt="banner" />
           <br></br>
+
           {!isStartButtonClicked && (
             <div className="startbtn">
               <button className="choiceButton" onClick={handleReady}>
@@ -101,7 +102,7 @@ const App = () => {
               </button>
             </div>
           )}
-          
+
         </>
       )}
 
@@ -118,8 +119,8 @@ const App = () => {
         
         <br></br>
         
-        
         <div className="textboxHolder">
+
           <Paper className='textbox'elevation={3} align='left'>
             {
               question.message ? 
@@ -144,6 +145,7 @@ const App = () => {
           
             
           </Paper>
+
         </div>
         
 
@@ -153,10 +155,7 @@ const App = () => {
               <button
                 key={choice}
                 value={choice}
-                className="choiceButton"
-                variant="contained"
                 onClick={(e) => handleChoice(choice)}
-                
               >
                 {choice}
               </button>
