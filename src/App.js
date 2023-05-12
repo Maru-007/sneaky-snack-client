@@ -6,8 +6,11 @@ import bannerImage from "./Banner.png";
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
+import Paper from "@mui/material/Paper";
+import PlaySound from "./Sound";
 import Paper from '@mui/material/Paper';
-import { sfx } from "./audio/audio";
+
+
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -26,7 +29,10 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+
   useEffect(() => {
     function handleConnect() {
       setIsConnected(true);
@@ -49,7 +55,7 @@ const App = () => {
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
       setChoices(question.choices);
-      console.log(question); 
+      console.log(question);
       console.log(question.choices);
     });
 
@@ -68,9 +74,8 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
-
+    setIsPlaying(true);
     setIsStartButtonClicked(true);
-
   };
 
 
@@ -82,14 +87,27 @@ const App = () => {
     setViewBanner(false);
     setDisplayRoom(true);
 
-    if (rooms.includes(choice)) setCurrentRoom(choice);
+    if (rooms.includes(choice)) {
+      setCurrentRoom(choice);
+      setDoorSound(true);
+    } else {
+      setDoorSound(false);
+    }
     console.log(currentRoom);
   };
 
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
+
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "play music" : "stop music"}
+      </button>
+
       <br></br>
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
+
       {viewBanner && (
         <>
           <img src={bannerImage} alt="banner" />
@@ -107,7 +125,6 @@ const App = () => {
       )}
 
       <div>
-
         {displayRoom && (
           <Room
             currentRoom={currentRoom}
@@ -116,10 +133,10 @@ const App = () => {
           />
         )}
 
-        
         <br></br>
-        
+
         <div className="textboxHolder">
+
 
           <Paper className='textbox'elevation={3} align='left'>
             {
@@ -129,10 +146,12 @@ const App = () => {
               <></>
 
             }
+
           </Paper>
         </div>
         <br></br>
         <div className="textboxHolder">
+
           <Paper className='textbox'elevation={3} align='left'>
             {
               message? 
@@ -145,9 +164,7 @@ const App = () => {
           
             
           </Paper>
-
         </div>
-        
 
         <div className="choices">
           {choices &&
