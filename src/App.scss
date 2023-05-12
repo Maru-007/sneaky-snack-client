@@ -1,23 +1,47 @@
-$backgroundColor: #f5f5f5;
+// color pallate
+// #637c67 - Army Light Green
+// #1e3230 - Dark Green
+// #6e130e - Dark red
+// #ff9100 - Orange
+// #f5ce97 - Tan/Light orange
+// #fff3d1 - Cream
+// #ffffff - White
 
-
-
-
-
+  body {
+     background-color: white;
+  }
   #root {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
+  .banner > img {
+    display: flex;
+    margin: auto;
+    width: 60%;
+  }
   .textboxHolder {
     display: flex;
-    align-items: center;
-    
+    justify-content: center;
   }
   .textbox {
-    
-    width: 50%;
-    
+    width: 25%;
+  }
+  .choices, .startbtn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .choiceButton {
+    border-color: #ffffff00;
+    border-radius: 100px;
+    width: 5rem;
+    height: 2rem;
+    background-color: #ff9100;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(255, 145, 0, 0.744);
+    }
   }
 
 

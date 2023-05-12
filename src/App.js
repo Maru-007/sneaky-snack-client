@@ -7,8 +7,9 @@ import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
-
 import PlaySound from "./Sound";
+import Paper from '@mui/material/Paper';
+
 
 const rooms = [
   "kidsroom",
@@ -28,9 +29,9 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
+  const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
 
   useEffect(() => {
     function handleConnect() {
@@ -74,7 +75,10 @@ const App = () => {
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
     setIsPlaying(true);
+    setIsStartButtonClicked(true);
   };
+
+
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -108,9 +112,15 @@ const App = () => {
         <>
           <img src={bannerImage} alt="banner" />
           <br></br>
-          <button className="startButton" onClick={handleReady}>
-            Start new game
-          </button>
+
+          {!isStartButtonClicked && (
+            <div className="startbtn">
+              <button className="choiceButton" onClick={handleReady}>
+                Start
+              </button>
+            </div>
+          )}
+
         </>
       )}
 
@@ -126,14 +136,33 @@ const App = () => {
         <br></br>
 
         <div className="textboxHolder">
-          <Paper className="textbox" elevation={3} align="center">
-            {question.message}
+
+
+          <Paper className='textbox'elevation={3} align='left'>
+            {
+              question.message ? 
+              <TypingComponent question={question.message}></TypingComponent>
+              :
+              <></>
+
+            }
+
           </Paper>
         </div>
         <br></br>
         <div className="textboxHolder">
-          <Paper className="textbox" elevation={3} align="center">
-            {message}
+
+          <Paper className='textbox'elevation={3} align='left'>
+            {
+              message? 
+              <TypingComponent question={message}></TypingComponent>
+              :
+              <></>
+
+            }
+            
+          
+            
           </Paper>
         </div>
 
