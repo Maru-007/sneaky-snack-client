@@ -1,5 +1,7 @@
 import React from "react";
 
+import MelisSprite from "./Melis-sprite.png"
+
 const roomInfo = {
   kidsroom: {
     areas: [
@@ -141,6 +143,8 @@ const Room = ({ currentRoom, handleNav }) => {
     <>
     <div className="roomimages">
       <img src={room} usemap="#image-map" alt={currentRoom} className="rooms"/>
+
+      <img className="sprite" src={MelisSprite} alt="Melis's sprite" />
 
       <map name="image-map">
         {areas.map((area) => (

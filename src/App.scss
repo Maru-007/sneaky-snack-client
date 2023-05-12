@@ -52,6 +52,16 @@
   .roomimages {
     display: flex;
     justify-content: center;
+    position: relative;
+    margin-bottom: 2em;
+  }
+
+  .sprite {
+    position: absolute;
+    z-index: 1;
+    bottom: 0px;
+    left: 45%;
+    
   }
 
   .rooms {
