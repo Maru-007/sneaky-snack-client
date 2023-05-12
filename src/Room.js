@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import imageMapResize from "image-map-resizer";
+import React from "react";
 
 const roomInfo = {
   kidsroom: {
@@ -121,13 +120,13 @@ const roomInfo = {
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "509,140,670,322",
+        coords: "500,140,680,320",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "832,141,964,323",
+        coords: "820,140,1142,320",
         shape: "rect",
       },
     ],
@@ -137,10 +136,6 @@ const roomInfo = {
 const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
   const room = `${currentRoom}.png`;
-
-  useEffect(() => {
-    imageMapResize();
-  }, []);
 
   return (
     <>
@@ -155,14 +150,14 @@ const Room = ({ currentRoom, handleNav }) => {
         <map name="image-map">
           {areas.map((area) => (
             <area
-              key={area.title}
-              alt={area.alt}
-              title={area.title}
-              coords={area.coords}
-              shape={area.shape}
-              onClick={(e) => handleNav(e.target.title)}
+            key={area.title}
+            alt={area.alt}
+            title={area.title}
+            coords={area.coords}
+            shape={area.shape}
+            onClick={(e) => handleNav(e.target.title)}
             />
-          ))}
+            ))}
         </map>
       </div>
     </>
