@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import imageMapResize from "image-map-resizer";
 
 const roomInfo = {
   kidsroom: {
@@ -23,15 +24,15 @@ const roomInfo = {
         title: "bathroom",
         alt: "bathroom",
         coords: "370,110,520,300",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "hallway",
         alt: "hallway",
         coords: "670,110,820,300",
-        shape: "rect"
-      }
-    ]
+        shape: "rect",
+      },
+    ],
   },
   kitchen: {
     areas: [
@@ -71,39 +72,39 @@ const roomInfo = {
         title: "kitchen",
         alt: "kitchen",
         coords: "60,65,130,200",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "livingroom",
         alt: "livingroom",
         coords: "190,65,260,200",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "parentsroom",
         alt: "parentsroom",
         coords: "320,65,390,200",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "bathroom",
         alt: "bathroom",
         coords: "520,65,590,200",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
         coords: "650,65,720,200",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "garage",
         alt: "garage",
         coords: "780,65,850,200",
-        shape: "rect"
-      }
-    ]
+        shape: "rect",
+      },
+    ],
   },
   garage: {
     areas: [
@@ -111,9 +112,9 @@ const roomInfo = {
         title: "hallway",
         alt: "hallway",
         coords: "670,120,830,310",
-        shape: "rect"
-      }
-    ]
+        shape: "rect",
+      },
+    ],
   },
   bathroom: {
     areas: [
@@ -121,55 +122,64 @@ const roomInfo = {
         title: "parentsroom",
         alt: "parentsroom",
         coords: "470,120,640,300",
-        shape: "rect"
+        shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
         coords: "780,120,960,300",
-        shape: "rect"
-      }
-    ]
-  }
+        shape: "rect",
+      },
+    ],
+  },
 };
 
 const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
-  const room = `${currentRoom}.png`
+  const room = `${currentRoom}.png`;
+
+  useEffect(() => {
+    imageMapResize();
+  }, []);
 
   return (
     <>
-    <div className="roomimages">
-      <img src={room} usemap="#image-map" alt={currentRoom} className="rooms"/>
+      <div className="roomimages">
+        <img
+          src={room}
+          usemap="#image-map"
+          alt={currentRoom}
+          className="rooms"
+        />
 
-      <map name="image-map">
-        {areas.map((area) => (
-          <area
-            key={area.title}
-            alt={area.alt}
-            title={area.title}
-            coords={area.coords}
-            shape={area.shape}
-            onClick={(e) => handleNav(e.target.title)}
-          />
-        ))}
-      </map>
+        <map name="image-map">
+          {areas.map((area) => (
+            <area
+              key={area.title}
+              alt={area.alt}
+              title={area.title}
+              coords={area.coords}
+              shape={area.shape}
+              onClick={(e) => handleNav(e.target.title)}
+            />
+          ))}
+        </map>
       </div>
     </>
   );
 };
 
-
 export default Room;
 
-
 // KIDS ROOM
-{/* <img src="kidsroom.png" alt="kidsroom" usemap="#image-map" />
+{
+  /* <img src="kidsroom.png" alt="kidsroom" usemap="#image-map" />
 
 <map name="image-map">
     <area target="" alt="bathroom" title="bathroom" coords="445,147,621,354" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
     <area target="" alt="hallway" title="hallway" coords="801,147,976,353" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
-</map>  */}
+</map>  */
+}
 
 // KITCHEN
 {
