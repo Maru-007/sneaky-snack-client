@@ -8,13 +8,13 @@ const roomInfo = {
       {
         alt: "bathroom",
         title: "bathroom",
-        coords: "380,110,535,300",
+        coords: "445,147,621,354",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "680,110,835,300",
+        coords: "801,147,976,353",
         shape: "rect",
       },
     ],
@@ -24,29 +24,29 @@ const roomInfo = {
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "370,110,520,300",
-        shape: "rect"
+        coords: "403,134,564,322",
+        shape: "rect",
       },
       {
         title: "hallway",
         alt: "hallway",
-        coords: "670,110,820,300",
-        shape: "rect"
-      }
-    ]
+        coords: "727,134,886,321",
+        shape: "rect",
+      },
+    ],
   },
   kitchen: {
     areas: [
       {
         alt: "livingroom",
         title: "livingroom",
-        coords: "1,120,130,300",
+        coords: "1,131,135,322",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "770,120,960,300",
+        coords: "832,133,968,321",
         shape: "rect",
       },
     ],
@@ -56,13 +56,13 @@ const roomInfo = {
       {
         alt: "kitchen",
         title: "kitchen",
-        coords: "780,130,950,300",
+        coords: "834,141,966,322",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "-1,130,130,300",
+        coords: "3,142,133,322",
         shape: "rect",
       },
     ],
@@ -72,77 +72,82 @@ const roomInfo = {
       {
         title: "kitchen",
         alt: "kitchen",
-        coords: "60,65,130,200",
-        shape: "rect"
+        coords: "74,96,145,218",
+        shape: "rect",
       },
       {
         title: "livingroom",
         alt: "livingroom",
-        coords: "190,65,260,200",
-        shape: "rect"
+        coords: "220,96,294,218",
+        shape: "rect",
       },
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "320,65,390,200",
-        shape: "rect"
+        coords: "367,96,439,218",
+        shape: "rect",
       },
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "520,65,590,200",
-        shape: "rect"
+        coords: "588,97,661,219",
+        shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "650,65,720,200",
-        shape: "rect"
+        coords: "734,96,807,218",
+        shape: "rect",
       },
       {
         title: "garage",
         alt: "garage",
-        coords: "780,65,850,200",
-        shape: "rect"
-      }
-    ]
+        coords: "882,96,955,220",
+        shape: "rect",
+      },
+    ],
   },
   garage: {
     areas: [
       {
         title: "hallway",
         alt: "hallway",
-        coords: "670,120,830,310",
-        shape: "rect"
-      }
-    ]
+        coords: "660,127,806,293",
+        shape: "rect",
+      },
+    ],
   },
   bathroom: {
     areas: [
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "470,120,640,300",
-        shape: "rect"
+        coords: "500,140,680,320",
+        shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "780,120,960,300",
-        shape: "rect"
-      }
-    ]
-  }
+        coords: "820,140,1142,320",
+        shape: "rect",
+      },
+    ],
+  },
 };
 
 const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
-  const room = `${currentRoom}.png`
+  const room = `${currentRoom}.png`;
 
   return (
     <>
-    <div className="roomimages">
-      <img src={room} usemap="#image-map" alt={currentRoom} className="rooms"/>
+      <div className="roomimages">
+        <img
+          src={room}
+          usemap="#image-map"
+          alt={currentRoom}
+          className="rooms"
+        />
 
       <img className="sprite" src={MelisSprite} alt="Melis's sprite" />
 
@@ -155,25 +160,25 @@ const Room = ({ currentRoom, handleNav }) => {
             coords={area.coords}
             shape={area.shape}
             onClick={(e) => handleNav(e.target.title)}
-          />
-        ))}
-      </map>
+            />
+            ))}
+        </map>
       </div>
     </>
   );
 };
 
-
 export default Room;
 
-
 // KIDS ROOM
-{/* <img src="kidsroom.png" alt="kidsroom" usemap="#image-map" />
+{
+  /* <img src="kidsroom.png" alt="kidsroom" usemap="#image-map" />
 
 <map name="image-map">
     <area target="" alt="bathroom" title="bathroom" coords="445,147,621,354" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
     <area target="" alt="hallway" title="hallway" coords="801,147,976,353" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
-</map>  */}
+</map>  */
+}
 
 // KITCHEN
 {

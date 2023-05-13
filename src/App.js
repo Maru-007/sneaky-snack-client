@@ -4,10 +4,12 @@ import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
-import TypingComponent from './Typewriter'
-import Button from '@mui/material/Button';
+// import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
+import PlaySound from "./Sound";
+import TypingComponent from "./Typewriter";
+
 const rooms = [
   "kidsroom",
   "bathroom",
@@ -26,6 +28,9 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [doorSound, setDoorSound] = useState(false);
+  const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
 
   useEffect(() => {
     function handleConnect() {
@@ -49,7 +54,7 @@ const App = () => {
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
       setChoices(question.choices);
-      console.log(question); 
+      console.log(question);
       console.log(question.choices);
     });
 
@@ -68,7 +73,11 @@ const App = () => {
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
+    setIsPlaying(true);
+    setIsStartButtonClicked(true);
   };
+
+
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -77,7 +86,12 @@ const App = () => {
     setViewBanner(false);
     setDisplayRoom(true);
 
-    if (rooms.includes(choice)) setCurrentRoom(choice);
+    if (rooms.includes(choice)) {
+      setCurrentRoom(choice);
+      setDoorSound(true);
+    } else {
+      setDoorSound(false);
+    }
     console.log(currentRoom);
   };
 
@@ -91,25 +105,32 @@ const App = () => {
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
+
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "play music" : "stop music"}
+      </button>
+
       <br></br>
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
+
       {viewBanner && (
         <>
-          <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
-          </div>
-          
+          <img src={bannerImage} alt="banner" />
           <br></br>
-          <div className="startbtn">
-            <button className="choiceButton" onClick={handleReady}>
-              Start
-            </button>
-          </div>
-          
+
+          {!isStartButtonClicked && (
+            <div className="startbtn">
+              <button className="choiceButton" onClick={handleReady}>
+                Start
+              </button>
+            </div>
+          )}
+
         </>
       )}
 
       <div>
-
         {displayRoom && (
           <Room
             currentRoom={currentRoom}
@@ -119,26 +140,38 @@ const App = () => {
           />
         )}
 
-        
         <br></br>
-        
-        
+
         <div className="textboxHolder">
+
+
           <Paper className='textbox'elevation={3} align='left'>
-          
-            <TypingComponent question={question.message}></TypingComponent>
+            {
+              question.message ? 
+              <TypingComponent question={question.message}></TypingComponent>
+              :
+              <></>
+
+            }
+
+          </Paper>
+        </div>
+        <br></br>
+        <div className="textboxHolder">
+
+          <Paper className='textbox'elevation={3} align='left'>
+            {
+              message? 
+              <TypingComponent question={message}></TypingComponent>
+              :
+              <></>
+
+            }
             
           
             
           </Paper>
         </div>
-        <br></br>
-        {/* <div className="textboxHolder">
-          <Paper className='textbox'elevation={3} align='left'>
-            <TypingComponent question={message}></TypingComponent>
-          </Paper>
-        </div> */}
-        
 
         <div className="choices">
           {choices &&
@@ -146,10 +179,7 @@ const App = () => {
               <button
                 key={choice}
                 value={choice}
-                className="choiceButton"
-                variant="contained"
                 onClick={(e) => handleChoice(choice)}
-                
               >
                 {choice}
               </button>
