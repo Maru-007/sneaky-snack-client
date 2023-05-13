@@ -31,6 +31,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     function handleConnect() {
@@ -50,6 +51,9 @@ const App = () => {
     // these are our listeners
     socket.on("connect", handleConnect);
     socket.on("disconnect", handleDisconnect);
+
+    socket.on(EVENT_NAMES.promptsGenerated, handleLoading);
+
     socket.on("response", (payload) => console.log(payload));
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
@@ -71,13 +75,16 @@ const App = () => {
     };
   }, []);
 
+  const handleLoading = () => {
+    setLoading(false)
+  
+  }
+
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
     setIsPlaying(true);
     setIsStartButtonClicked(true);
   };
-
-
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -99,9 +106,8 @@ const App = () => {
     socket.emit(EVENT_NAMES.selection, room);
     setCurrentRoom(room);
     console.log(room);
-  }
-  
- 
+  };
+
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
@@ -117,7 +123,7 @@ const App = () => {
       {viewBanner && (
         <>
           <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
+            <img src={bannerImage} alt="banner" />
           </div>
           <br></br>
 
@@ -128,7 +134,6 @@ const App = () => {
               </button>
             </div>
           )}
-
         </>
       )}
 
@@ -145,48 +150,38 @@ const App = () => {
         <br></br>
 
         <div className="textboxHolder">
-
-
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              question.message ? 
+          <Paper className="textbox" elevation={3} align="left">
+            {question.message ? (
               <TypingComponent question={question.message}></TypingComponent>
-              :
+            ) : (
               <></>
-
-            }
-
+            )}
           </Paper>
         </div>
         <br></br>
-        
-        { message ? 
 
+        {message ? (
           <div className="textboxHolder">
+            <Paper className="textbox" elevation={3} align="left">
+              {
+                // message ?
+                <TypingComponent question={message}></TypingComponent>
+                // :
+                // <></>
+              }
+            </Paper>
+          </div>
+        ) : (
+          <></>
+        )}
 
-              
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              // message ? 
-              <TypingComponent question={message}></TypingComponent>
-              // :
-              // <></>
-
-            }
-            
-          
-            
-          </Paper>
-        </div>
-        : <></>
-        }
+        {loading === true && isStartButtonClicked === true ? <div className="loading"><p>Loading...</p></div> :<></>}
 
         <div className="choices">
           {choices &&
             choices.map((choice) => (
               <button
                 className="choiceButton"
-                
                 key={choice}
                 value={choice}
                 onClick={(e) => handleChoice(choice)}

@@ -4,6 +4,7 @@ const EVENT_NAMES = {
     questionsReady: 'questionsReady',
     selection: 'selection',
     message: 'message',
+    promptsGenerated: 'promptsGenerated'
 
   };
   
