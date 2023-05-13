@@ -159,14 +159,18 @@ const App = () => {
           </Paper>
         </div>
         <br></br>
-        <div className="textboxHolder">
+        
+        { message ? 
 
+          <div className="textboxHolder">
+
+              
           <Paper className='textbox'elevation={3} align='left'>
             {
-              message ? 
+              // message ? 
               <TypingComponent question={message}></TypingComponent>
-              :
-              <></>
+              // :
+              // <></>
 
             }
             
@@ -174,6 +178,8 @@ const App = () => {
             
           </Paper>
         </div>
+        : <></>
+        }
 
         <div className="choices">
           {choices &&
