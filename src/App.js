@@ -163,7 +163,7 @@ const App = () => {
 
           <Paper className='textbox'elevation={3} align='left'>
             {
-              message? 
+              message ? 
               <TypingComponent question={message}></TypingComponent>
               :
               <></>
