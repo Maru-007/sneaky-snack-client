@@ -1,6 +1,10 @@
 import React from "react";
 
 import MelisSprite from "./Melis-sprite.png"
+import { useMediaQuery } from "@mui/material";
+
+//Size 1: max-width: 2560px
+//Size 2: max-width: 1920px
 
 const roomInfo = {
   kidsroom: {
@@ -9,14 +13,16 @@ const roomInfo = {
         alt: "bathroom",
         title: "bathroom",
         //Macbook coords
-        coords: "390,134,550,350",
+        macCoords: "390,134,550,350",
+        coords: "480,134,660,350",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
         //Macbook coords
-        coords: "715,134,870,300",
+        macCoords: "715,134,870,300",
+        coords: "870,134,1060,400",
         shape: "rect",
       },
     ],
@@ -27,14 +33,16 @@ const roomInfo = {
         title: "bathroom",
         alt: "bathroom",
         //Macbook coords
-        coords: "395,135,555,350",
+        macCoords: "395,135,555,350",
+        coords: "480,134,660,350",
         shape: "rect",
       },
       {
         title: "hallway",
         alt: "hallway",
         //Macbook coords
-        coords: "710,125,870,300",
+        macCoords: "710,125,870,300",
+        coords: "870,134,1060,400",
         shape: "rect",
       },
     ],
@@ -45,14 +53,16 @@ const roomInfo = {
         alt: "livingroom",
         title: "livingroom",
         //Macbook coords
-        coords: "1,130,137,315",
+        macCoords: "1,130,137,315",
+        coords: "1,150,150,370",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
         //Macbook coords
-        coords: "815,130,957,315",
+        macCoords: "815,130,957,315",
+        coords: "980,133,1200,370",
         shape: "rect",
       },
     ],
@@ -63,14 +73,16 @@ const roomInfo = {
         alt: "kitchen",
         title: "kitchen",
         //Macbook coords
-        coords: "815,130,957,315",
+        macCoords: "815,130,957,315",
+        coords: "980,141,1150,370",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
         //Macbook coords
-        coords: "1,130,135,315",
+        macCoords: "1,130,135,315",
+        coords: "3,142,150,370",
         shape: "rect",
       },
     ],
@@ -81,42 +93,48 @@ const roomInfo = {
         title: "kitchen",
         alt: "kitchen",
         //Macbook coords
-        coords: "65,85,138,200",
+        macCoords: "65,85,138,200",
+        coords: "75,96,165,240",
         shape: "rect",
       },
       {
         title: "livingroom",
         alt: "livingroom",
         //Macbook coords
-        coords: "203,85,276,200",
+        macCoords: "203,85,276,200",
+        coords: "240,96,350,240",
         shape: "rect",
       },
       {
         title: "parentsroom",
         alt: "parentsroom",
         //Macbook coords
-        coords: "340,85,413,200",
+        macCoords: "340,85,413,200",
+        coords: "410,96,500,240",
         shape: "rect",
       },
       {
         title: "bathroom",
         alt: "bathroom",
         //Macbook coords
-        coords: "540,85,615,200",
+        macCoords: "540,85,615,200",
+        coords: "650,96,740,240",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
         //Macbook coords
-        coords: "680,85,750,200",
+        macCoords: "680,85,750,200",
+        coords: "810,96,900,240",
         shape: "rect",
       },
       {
         title: "garage",
         alt: "garage",
         //Macbook coords
-        coords: "810,85,880,200",
+        macCoords: "810,85,880,200",
+        coords: "970,96,1060,240",
         shape: "rect",
       },
     ],
@@ -127,7 +145,8 @@ const roomInfo = {
         title: "hallway",
         alt: "hallway",
         //Macbook coords
-        coords: "710,140,880,310",
+        macCoords: "710,140,880,310",
+        coords: "850,160,1050,370",
         shape: "rect",
       },
     ],
@@ -138,24 +157,39 @@ const roomInfo = {
         title: "parentsroom",
         alt: "parentsroom",
         //Macbook coords
-        coords: "500,140,660,320",
+        macCoords: "500,140,660,320",
+        coords: "610,140,800,370",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
         //Macbook coords
-        coords: "815,140,950,320",
+        macCoords: "815,140,950,320",
+        coords: "1000,140,1142,370",
         shape: "rect",
       },
     ],
   },
 };
 
+
+
 const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
   const room = `${currentRoom}.png`;
 
+
+const isMacScreen = useMediaQuery("(max-width: 1920px)");
+
+// const getAdjustedCoords = () => {
+// if (!isMacScreen){
+//   return [roomInfo[currentRoom].areas[0].coords, roomInfo[currentRoom].areas[1].coords];
+// } else if (isMacScreen){
+//   return areas.macCoords;
+// }
+// }
+//roomInfo[currentRoom].areas[0/1].macCoords/coords
   return (
     <>
       <div className="roomimages">
@@ -174,7 +208,7 @@ const Room = ({ currentRoom, handleNav }) => {
             key={area.title}
             alt={area.alt}
             title={area.title}
-            coords={area.coords}
+            coords={!isMacScreen ? area.coords : area.macCoords}
             shape={area.shape}
             onClick={(e) => handleNav(e.target.title)}
             />
