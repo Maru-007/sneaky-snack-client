@@ -179,17 +179,8 @@ const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
   const room = `${currentRoom}.png`;
 
+const isMacScreen = useMediaQuery("(min-width: 2560px)");
 
-const isMacScreen = useMediaQuery("(max-width: 1920px)");
-
-// const getAdjustedCoords = () => {
-// if (!isMacScreen){
-//   return [roomInfo[currentRoom].areas[0].coords, roomInfo[currentRoom].areas[1].coords];
-// } else if (isMacScreen){
-//   return areas.macCoords;
-// }
-// }
-//roomInfo[currentRoom].areas[0/1].macCoords/coords
   return (
     <>
       <div className="roomimages">
@@ -208,7 +199,7 @@ const isMacScreen = useMediaQuery("(max-width: 1920px)");
             key={area.title}
             alt={area.alt}
             title={area.title}
-            coords={!isMacScreen ? area.coords : area.macCoords}
+            coords={isMacScreen ? area.macCoords : area.coords }
             shape={area.shape}
             onClick={(e) => handleNav(e.target.title)}
             />
