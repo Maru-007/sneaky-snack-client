@@ -8,13 +8,13 @@ const roomInfo = {
       {
         alt: "bathroom",
         title: "bathroom",
-        coords: "445,147,621,354",
+        coords: "480,134,660,350",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "801,147,976,353",
+        coords: "870,134,1060,400",
         shape: "rect",
       },
     ],
@@ -24,13 +24,13 @@ const roomInfo = {
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "403,134,564,322",
+        coords: "480,134,660,350",
         shape: "rect",
       },
       {
         title: "hallway",
         alt: "hallway",
-        coords: "727,134,886,321",
+        coords: "870,134,1060,400",
         shape: "rect",
       },
     ],
@@ -40,13 +40,13 @@ const roomInfo = {
       {
         alt: "livingroom",
         title: "livingroom",
-        coords: "1,131,135,322",
+        coords: "1,150,150,370",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "832,133,968,321",
+        coords: "980,133,1200,370",
         shape: "rect",
       },
     ],
@@ -56,13 +56,13 @@ const roomInfo = {
       {
         alt: "kitchen",
         title: "kitchen",
-        coords: "834,141,966,322",
+        coords: "980,141,1150,370",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "3,142,133,322",
+        coords: "3,142,150,370",
         shape: "rect",
       },
     ],
@@ -72,37 +72,37 @@ const roomInfo = {
       {
         title: "kitchen",
         alt: "kitchen",
-        coords: "74,96,145,218",
+        coords: "75,96,165,240",
         shape: "rect",
       },
       {
         title: "livingroom",
         alt: "livingroom",
-        coords: "220,96,294,218",
+        coords: "240,96,350,240",
         shape: "rect",
       },
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "367,96,439,218",
+        coords: "410,96,500,240",
         shape: "rect",
       },
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "588,97,661,219",
+        coords: "650,96,740,240",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "734,96,807,218",
+        coords: "810,96,900,240",
         shape: "rect",
       },
       {
         title: "garage",
         alt: "garage",
-        coords: "882,96,955,220",
+        coords: "970,96,1060,240",
         shape: "rect",
       },
     ],
@@ -112,7 +112,7 @@ const roomInfo = {
       {
         title: "hallway",
         alt: "hallway",
-        coords: "660,127,806,293",
+        coords: "850,160,1050,370",
         shape: "rect",
       },
     ],
@@ -122,13 +122,13 @@ const roomInfo = {
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "500,140,680,320",
+        coords: "610,140,800,370",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "820,140,1142,320",
+        coords: "1000,140,1142,370",
         shape: "rect",
       },
     ],
@@ -170,76 +170,3 @@ const Room = ({ currentRoom, handleNav }) => {
 
 export default Room;
 
-// KIDS ROOM
-{
-  /* <img src="kidsroom.png" alt="kidsroom" usemap="#image-map" />
-
-<map name="image-map">
-    <area target="" alt="bathroom" title="bathroom" coords="445,147,621,354" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
-    <area target="" alt="hallway" title="hallway" coords="801,147,976,353" shape="rect" onClick={(e) => handleNav(e.target.title)}/>
-</map>  */
-}
-
-// KITCHEN
-{
-  /* <img src="kitchen.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="" alt="livingroom" title="livingroom" href="" coords="1,131,135,322" shape="rect">
-    <area target="" alt="hallway" title="hallway" href="" coords="832,133,968,321" shape="rect">
-</map> */
-}
-
-{
-  /* <img src="hallway.png" usemap="#image-map">
-
-
-// HALLWAY
-<map name="image-map">
-    <area target="" alt="kitchen" title="kitchen" href="" coords="74,96,145,218" shape="rect">
-    <area target="" alt="livingroom" title="livingroom" href="" coords="220,96,294,218" shape="rect">
-    <area target="" alt="parentsroom" title="parentsroom" href="" coords="367,96,439,218" shape="rect">
-    <area target="" alt="bathroom" title="bathroom" href="" coords="588,97,661,219" shape="rect">
-    <area target="" alt="kidsroom" title="kidsroom" href="" coords="734,96,807,218" shape="rect">
-    <area target="" alt="garage" title="garage" href="" coords="882,96,955,220" shape="rect">
-</map> */
-}
-
-// GARAGE
-{
-  /* <img src="garage.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="" alt="hallway" title="hallway" href="" coords="660,127,806,293" shape="rect">
-</map> */
-}
-
-// BATHROOM
-{
-  /* <img src="bathroom.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="" alt="parentsroom" title="parentsroom" href="" coords="509,140,670,322" shape="rect">
-    <area target="" alt="kidsroom" title="kidsroom" href="" coords="832,141,964,323" shape="rect">
-</map> */
-}
-
-// LIVING ROOM
-{
-  /* <img src="livingroom.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="" alt="kitchen" title="kitchen" href="" coords="3,142,133,322" shape="rect">
-    <area target="" alt="hallway" title="hallway" href="" coords="834,141,966,322" shape="rect">
-</map> */
-}
-
-// PARENTS ROOM
-{
-  /* <img src="parentsroom.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="" alt="bathroom" title="bathroom" href="" coords="403,134,564,322" shape="rect">
-    <area target="" alt="hallway" title="hallway" href="" coords="727,134,886,321" shape="rect">
-</map> */
-}
