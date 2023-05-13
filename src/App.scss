@@ -55,9 +55,15 @@ body {
 .loading {
   width: 100%;
   display: flex;
-  justify-content: center;
+align-items:center;
+justify-content: center;
   color: white;
   font-size: 2em;
+  gap:10px;
+}
+
+.spinner{
+  width: 3em;
 }
 
 .roomimages {

@@ -3,6 +3,7 @@ import { socket } from "./socket";
 import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
+import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
@@ -177,6 +178,7 @@ const App = () => {
         {/* loading indicator */}
         {loading === true && isStartButtonClicked === true ? (
           <div className="loading">
+            <img className= "spinner" src={loadingSpinner} alt="loading"/>
             <p>Loading...</p>
           </div>
         ) : (
