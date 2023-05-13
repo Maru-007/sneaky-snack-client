@@ -8,13 +8,15 @@ const roomInfo = {
       {
         alt: "bathroom",
         title: "bathroom",
-        coords: "480,134,660,350",
+        //Macbook coords
+        coords: "390,134,550,350",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "870,134,1060,400",
+        //Macbook coords
+        coords: "715,134,870,300",
         shape: "rect",
       },
     ],
@@ -24,13 +26,15 @@ const roomInfo = {
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "480,134,660,350",
+        //Macbook coords
+        coords: "395,135,555,350",
         shape: "rect",
       },
       {
         title: "hallway",
         alt: "hallway",
-        coords: "870,134,1060,400",
+        //Macbook coords
+        coords: "710,125,870,300",
         shape: "rect",
       },
     ],
@@ -40,13 +44,15 @@ const roomInfo = {
       {
         alt: "livingroom",
         title: "livingroom",
-        coords: "1,150,150,370",
+        //Macbook coords
+        coords: "1,130,137,315",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "980,133,1200,370",
+        //Macbook coords
+        coords: "815,130,957,315",
         shape: "rect",
       },
     ],
@@ -56,13 +62,15 @@ const roomInfo = {
       {
         alt: "kitchen",
         title: "kitchen",
-        coords: "980,141,1150,370",
+        //Macbook coords
+        coords: "815,130,957,315",
         shape: "rect",
       },
       {
         alt: "hallway",
         title: "hallway",
-        coords: "3,142,150,370",
+        //Macbook coords
+        coords: "1,130,135,315",
         shape: "rect",
       },
     ],
@@ -72,37 +80,43 @@ const roomInfo = {
       {
         title: "kitchen",
         alt: "kitchen",
-        coords: "75,96,165,240",
+        //Macbook coords
+        coords: "65,85,138,200",
         shape: "rect",
       },
       {
         title: "livingroom",
         alt: "livingroom",
-        coords: "240,96,350,240",
+        //Macbook coords
+        coords: "203,85,276,200",
         shape: "rect",
       },
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "410,96,500,240",
+        //Macbook coords
+        coords: "340,85,413,200",
         shape: "rect",
       },
       {
         title: "bathroom",
         alt: "bathroom",
-        coords: "650,96,740,240",
+        //Macbook coords
+        coords: "540,85,615,200",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "810,96,900,240",
+        //Macbook coords
+        coords: "680,85,750,200",
         shape: "rect",
       },
       {
         title: "garage",
         alt: "garage",
-        coords: "970,96,1060,240",
+        //Macbook coords
+        coords: "810,85,880,200",
         shape: "rect",
       },
     ],
@@ -112,7 +126,8 @@ const roomInfo = {
       {
         title: "hallway",
         alt: "hallway",
-        coords: "850,160,1050,370",
+        //Macbook coords
+        coords: "710,140,880,310",
         shape: "rect",
       },
     ],
@@ -122,13 +137,15 @@ const roomInfo = {
       {
         title: "parentsroom",
         alt: "parentsroom",
-        coords: "610,140,800,370",
+        //Macbook coords
+        coords: "500,140,660,320",
         shape: "rect",
       },
       {
         title: "kidsroom",
         alt: "kidsroom",
-        coords: "1000,140,1142,370",
+        //Macbook coords
+        coords: "815,140,950,320",
         shape: "rect",
       },
     ],
