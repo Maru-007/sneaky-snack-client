@@ -1,31 +1,22 @@
 import Typewriter from 'typewriter-effect';
-import { useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 const TypingComponent = ({ question }) => {
-    const typewriterRef = useRef(null);
-  
-    useEffect(() => {
-      if (question && typewriterRef.current) {
-        const typewriter = typewriterRef.current;
-        
-        typewriter
-        .changeDelay(25)
-          .deleteAll(.1)
-          .typeString(question)
-          .start();
-      }
-    }, [question]);
-    return (
-      <>
-        {question ? (
-          <Typewriter
-            onInit={(typewriter) => {
-              typewriterRef.current = typewriter;
-            }}
-          />
-        ) : (
-          question
-        )}
-      </>
-    );
-  };
-  export default TypingComponent;
+  const [key, setKey] = useState(Math.random());
+
+  useEffect(() => {
+    setKey(Math.random()); // change key to enforce re-render
+  }, [question]);
+
+  return (
+    <Typewriter
+      key={key}
+      options={{ delay: 25 }}
+      onInit={(typewriter) => {
+        typewriter.typeString(question || '').start();
+      }}
+    />
+  );
+};
+
+export default TypingComponent;
