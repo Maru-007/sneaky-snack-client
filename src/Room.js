@@ -1,7 +1,7 @@
 import React from "react";
 
 import MelisSprite from "./Melis-sprite.png"
-
+import DiegoSprite from "./pixil-frame-0.png"
 const roomInfo = {
   kidsroom: {
     areas: [
@@ -138,7 +138,7 @@ const roomInfo = {
 const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
   const room = `${currentRoom}.png`;
-
+  console.log(currentRoom)
   return (
     <>
       <div className="roomimages">
@@ -150,6 +150,7 @@ const Room = ({ currentRoom, handleNav }) => {
         />
 
       <img className="sprite" src={MelisSprite} alt="Melis's sprite" />
+      <img className="sprite2" src={DiegoSprite} alt="Diego's sprite"/>
 
       <map name="image-map">
         {areas.map((area) => (

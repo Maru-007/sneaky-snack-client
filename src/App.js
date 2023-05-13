@@ -21,7 +21,7 @@ const rooms = [
 ];
 
 const App = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(false); // make for each player?
   const [question, setQuestion] = useState("");
   const [choices, setChoices] = useState([]);
   const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
-
+  
   useEffect(() => {
     function handleConnect() {
       setIsConnected(true);
@@ -39,7 +39,7 @@ const App = () => {
       setQuestion("");
       setChoices([]);
     }
-
+    
     function handleDisconnect() {
       setIsConnected(false);
       console.log("handleDisconnect has been triggered");
@@ -85,7 +85,7 @@ const App = () => {
     socket.emit(EVENT_NAMES.selection, choice);
     setViewBanner(false);
     setDisplayRoom(true);
-
+    
     if (rooms.includes(choice)) {
       setCurrentRoom(choice);
       setDoorSound(true);
