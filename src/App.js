@@ -76,9 +76,8 @@ const App = () => {
   }, []);
 
   const handleLoading = () => {
-    setLoading(false)
-  
-  }
+    setLoading(false);
+  };
 
   const handleReady = () => {
     socket.emit(EVENT_NAMES.childReady);
@@ -175,7 +174,14 @@ const App = () => {
           <></>
         )}
 
-        {loading === true && isStartButtonClicked === true ? <div className="loading"><p>Loading...</p></div> :<></>}
+        {/* loading indicator */}
+        {loading === true && isStartButtonClicked === true ? (
+          <div className="loading">
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className="choices">
           {choices &&
