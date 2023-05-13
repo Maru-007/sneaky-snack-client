@@ -116,7 +116,9 @@ const App = () => {
 
       {viewBanner && (
         <>
-          <img src={bannerImage} alt="banner" />
+          <div className="banner">
+            <img  src={bannerImage} alt="banner" /> 
+          </div>
           <br></br>
 
           {!isStartButtonClicked && (
@@ -177,6 +179,8 @@ const App = () => {
           {choices &&
             choices.map((choice) => (
               <button
+                className="choiceButton"
+                
                 key={choice}
                 value={choice}
                 onClick={(e) => handleChoice(choice)}
