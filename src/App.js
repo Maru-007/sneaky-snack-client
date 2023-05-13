@@ -8,8 +8,7 @@ import Room from "./Room";
 // import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import PlaySound from "./Sound";
-import Paper from '@mui/material/Paper';
-
+import TypingComponent from "./Typewriter";
 
 const rooms = [
   "kidsroom",
@@ -96,6 +95,13 @@ const App = () => {
     console.log(currentRoom);
   };
 
+  const handleNav = (room) => {
+    socket.emit(EVENT_NAMES.selection, room);
+    setCurrentRoom(room);
+    console.log(room);
+  }
+  
+ 
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
@@ -130,6 +136,7 @@ const App = () => {
             currentRoom={currentRoom}
             handleChoice={handleChoice}
             rooms={rooms}
+            handleNav={handleNav}
           />
         )}
 
