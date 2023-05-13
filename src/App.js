@@ -8,8 +8,7 @@ import Room from "./Room";
 // import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import PlaySound from "./Sound";
-import Paper from '@mui/material/Paper';
-
+import TypingComponent from "./Typewriter";
 
 const rooms = [
   "kidsroom",
