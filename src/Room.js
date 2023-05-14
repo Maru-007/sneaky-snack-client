@@ -1,7 +1,7 @@
 import React from "react";
 
 import MelisSprite from "./Melis-sprite.png"
-import { useMediaQuery } from "@mui/material";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 //Size 1: max-width: 2560px
 //Size 2: max-width: 1920px
