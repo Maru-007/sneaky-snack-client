@@ -3,6 +3,7 @@ import { socket } from "./socket";
 import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
+import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
@@ -31,6 +32,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // const [player, setPlayer] = useState("Melis");
 
@@ -52,6 +54,9 @@ const App = () => {
     // these are our listeners
     socket.on("connect", handleConnect);
     socket.on("disconnect", handleDisconnect);
+
+    socket.on(EVENT_NAMES.promptsGenerated, handleLoading);
+
     socket.on("response", (payload) => console.log(payload));
     socket.on(EVENT_NAMES.questionsReady, (question) => {
       setQuestion(question);
@@ -73,12 +78,17 @@ const App = () => {
     };
   }, []);
 
+  const handleLoading = () => {
+    setLoading(false);
+  };
+
   const handleReady = (player) => {
     if ( player === "Melis") {
       socket.emit(EVENT_NAMES.childReady)
     } else if ( player === "Diego"){
       socket.emit(EVENT_NAMES.dogReady)
     } 
+
     setIsPlaying(true);
     setIsStartButtonClicked(true);
   };
@@ -121,11 +131,13 @@ const App = () => {
         <>
           <div className="banner">
             <img src={bannerImage} alt="banner" />
+
           </div>
 
           <div className="Lobby">
             <button onClick={()=>{handleReady("Melis")}}>Play as Melis</button>
             <button onClick={()=>{handleReady("Diego")}}>Play as Diego</button>
+
           </div>
           <br></br>
 
@@ -178,6 +190,18 @@ const App = () => {
         ) : (
           <></>
         )}
+
+
+        {/* loading indicator */}
+        {loading === true && isStartButtonClicked === true ? (
+          <div className="loading">
+            <img className= "spinner" src={loadingSpinner} alt="loading"/>
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <></>
+        )}
+
 
         <div className="choices">
           {choices &&
