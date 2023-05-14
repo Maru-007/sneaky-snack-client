@@ -144,7 +144,7 @@ const Room = ({ currentRoom, handleNav }) => {
       <div className="roomimages">
         <img
           src={room}
-          usemap="#image-map"
+          useMap="#image-map"
           alt={currentRoom}
           className="rooms"
         />
