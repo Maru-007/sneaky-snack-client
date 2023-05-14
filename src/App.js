@@ -82,9 +82,11 @@ const App = () => {
   const handleChoice = (choice) => {
     setMessage("");
     console.log(choice);
+    if(choice === "Play again") {setCurrentRoom("kidsroom")};
+        
     socket.emit(EVENT_NAMES.selection, choice);
     setViewBanner(false);
-    setDisplayRoom(true);
+    setDisplayRoom(true);  
 
     if (rooms.includes(choice)) {
       setCurrentRoom(choice);
