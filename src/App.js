@@ -3,7 +3,7 @@ import { socket } from "./socket";
 import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
-import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
+import loadingSpinner from "./assets/rainbow-spinner-loading.gif";
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
 // import Box from '@mui/material/Box';
@@ -83,11 +83,11 @@ const App = () => {
   };
 
   const handleReady = (player) => {
-    if ( player === "Melis") {
-      socket.emit(EVENT_NAMES.childReady)
-    } else if ( player === "Diego"){
-      socket.emit(EVENT_NAMES.dogReady)
-    } 
+    if (player === "Melis") {
+      socket.emit(EVENT_NAMES.childReady);
+    } else if (player === "Diego") {
+      socket.emit(EVENT_NAMES.dogReady);
+    }
 
     setIsPlaying(true);
     setIsStartButtonClicked(true);
@@ -112,17 +112,18 @@ const App = () => {
   const handleNav = (room) => {
     socket.emit(EVENT_NAMES.selection, room);
     setCurrentRoom(room);
+    setDoorSound(true);
     console.log(room);
   };
 
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
-
-      <button onClick={() => setIsPlaying(!isPlaying)}>
-        {!isPlaying ? "play music" : "stop music"}
-      </button>
-
+      {isConnected && (
+        <button onClick={() => setIsPlaying(!isPlaying)}>
+          {!isPlaying ? "play music" : "stop music"}
+        </button>
+      )}
       <br></br>
 
       <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
@@ -131,14 +132,26 @@ const App = () => {
         <>
           <div className="banner">
             <img src={bannerImage} alt="banner" />
-
           </div>
 
-          <div className="Lobby">
-            <button onClick={()=>{handleReady("Melis")}}>Play as Melis</button>
-            <button onClick={()=>{handleReady("Diego")}}>Play as Diego</button>
-
-          </div>
+          {isConnected && (
+            <div className="Lobby">
+              <button
+                onClick={() => {
+                  handleReady("Melis");
+                }}
+              >
+                Play as Melis
+              </button>
+              <button
+                onClick={() => {
+                  handleReady("Diego");
+                }}
+              >
+                Play as Diego
+              </button>
+            </div>
+          )}
           <br></br>
 
           {!isStartButtonClicked && (
@@ -150,7 +163,6 @@ const App = () => {
           )}
         </>
       )}
-
       <div>
         {displayRoom ? (
           <Room
@@ -163,17 +175,6 @@ const App = () => {
           <div className="Lobby"></div>
         )}
 
-        <br></br>
-
-        <div className="textboxHolder">
-          <Paper className="textbox" elevation={3} align="left">
-            {question.message ? (
-              <TypingComponent question={question.message}></TypingComponent>
-            ) : (
-              <></>
-            )}
-          </Paper>
-        </div>
         <br></br>
 
         {message ? (
@@ -191,17 +192,26 @@ const App = () => {
           <></>
         )}
 
+        <div className="textboxHolder">
+          <Paper className="textbox" elevation={3} align="left">
+            {question.message ? (
+              <TypingComponent question={question.message}></TypingComponent>
+            ) : (
+              <></>
+            )}
+          </Paper>
+        </div>
+        <br></br>
 
         {/* loading indicator */}
         {loading === true && isStartButtonClicked === true ? (
           <div className="loading">
-            <img className= "spinner" src={loadingSpinner} alt="loading"/>
+            <img className="spinner" src={loadingSpinner} alt="loading" />
             <p>Loading...</p>
           </div>
         ) : (
           <></>
         )}
-
 
         <div className="choices">
           {choices &&
