@@ -31,7 +31,9 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
-  
+
+  // const [player, setPlayer] = useState("Melis");
+
   useEffect(() => {
     function handleConnect() {
       setIsConnected(true);
@@ -39,7 +41,7 @@ const App = () => {
       setQuestion("");
       setChoices([]);
     }
-    
+
     function handleDisconnect() {
       setIsConnected(false);
       console.log("handleDisconnect has been triggered");
@@ -71,13 +73,15 @@ const App = () => {
     };
   }, []);
 
-  const handleReady = () => {
-    socket.emit(EVENT_NAMES.childReady);
+  const handleReady = (player) => {
+    if ( player === "Melis") {
+      socket.emit(EVENT_NAMES.childReady)
+    } else if ( player === "Diego"){
+      socket.emit(EVENT_NAMES.dogReady)
+    } 
     setIsPlaying(true);
     setIsStartButtonClicked(true);
   };
-
-
 
   const handleChoice = (choice) => {
     setMessage("");
@@ -85,7 +89,7 @@ const App = () => {
     socket.emit(EVENT_NAMES.selection, choice);
     setViewBanner(false);
     setDisplayRoom(true);
-    
+
     if (rooms.includes(choice)) {
       setCurrentRoom(choice);
       setDoorSound(true);
@@ -99,9 +103,8 @@ const App = () => {
     socket.emit(EVENT_NAMES.selection, room);
     setCurrentRoom(room);
     console.log(room);
-  }
-  
- 
+  };
+
   return (
     <div>
       <p>{isConnected ? "connected" : "not connected"}</p>
@@ -117,7 +120,12 @@ const App = () => {
       {viewBanner && (
         <>
           <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
+            <img src={bannerImage} alt="banner" />
+          </div>
+
+          <div className="Lobby">
+            <button onClick={()=>{handleReady("Melis")}}>Play as Melis</button>
+            <button onClick={()=>{handleReady("Diego")}}>Play as Diego</button>
           </div>
           <br></br>
 
@@ -128,65 +136,54 @@ const App = () => {
               </button>
             </div>
           )}
-
         </>
       )}
 
       <div>
-        {displayRoom && (
+        {displayRoom ? (
           <Room
             currentRoom={currentRoom}
             handleChoice={handleChoice}
             rooms={rooms}
             handleNav={handleNav}
           />
+        ) : (
+          <div className="Lobby"></div>
         )}
 
         <br></br>
 
         <div className="textboxHolder">
-
-
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              question.message ? 
+          <Paper className="textbox" elevation={3} align="left">
+            {question.message ? (
               <TypingComponent question={question.message}></TypingComponent>
-              :
+            ) : (
               <></>
-
-            }
-
+            )}
           </Paper>
         </div>
         <br></br>
-        
-        { message ? 
 
+        {message ? (
           <div className="textboxHolder">
-
-              
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              // message ? 
-              <TypingComponent question={message}></TypingComponent>
-              // :
-              // <></>
-
-            }
-            
-          
-            
-          </Paper>
-        </div>
-        : <></>
-        }
+            <Paper className="textbox" elevation={3} align="left">
+              {
+                // message ?
+                <TypingComponent question={message}></TypingComponent>
+                // :
+                // <></>
+              }
+            </Paper>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className="choices">
           {choices &&
             choices.map((choice) => (
               <button
                 className="choiceButton"
-                
                 key={choice}
                 value={choice}
                 onClick={(e) => handleChoice(choice)}
