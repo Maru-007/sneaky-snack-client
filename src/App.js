@@ -22,7 +22,7 @@ const rooms = [
 ];
 
 const App = () => {
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(false); // make for each player?
   const [question, setQuestion] = useState("");
   const [choices, setChoices] = useState([]);
   const [message, setMessage] = useState("");
@@ -33,6 +33,8 @@ const App = () => {
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // const [player, setPlayer] = useState("Melis");
 
   useEffect(() => {
     function handleConnect() {
@@ -80,8 +82,13 @@ const App = () => {
     setLoading(false);
   };
 
-  const handleReady = () => {
-    socket.emit(EVENT_NAMES.childReady);
+  const handleReady = (player) => {
+    if ( player === "Melis") {
+      socket.emit(EVENT_NAMES.childReady)
+    } else if ( player === "Diego"){
+      socket.emit(EVENT_NAMES.dogReady)
+    } 
+
     setIsPlaying(true);
     setIsStartButtonClicked(true);
   };
@@ -124,6 +131,13 @@ const App = () => {
         <>
           <div className="banner">
             <img src={bannerImage} alt="banner" />
+
+          </div>
+
+          <div className="Lobby">
+            <button onClick={()=>{handleReady("Melis")}}>Play as Melis</button>
+            <button onClick={()=>{handleReady("Diego")}}>Play as Diego</button>
+
           </div>
           <br></br>
 
@@ -138,13 +152,15 @@ const App = () => {
       )}
 
       <div>
-        {displayRoom && (
+        {displayRoom ? (
           <Room
             currentRoom={currentRoom}
             handleChoice={handleChoice}
             rooms={rooms}
             handleNav={handleNav}
           />
+        ) : (
+          <div className="Lobby"></div>
         )}
 
         <br></br>
@@ -175,6 +191,7 @@ const App = () => {
           <></>
         )}
 
+
         {/* loading indicator */}
         {loading === true && isStartButtonClicked === true ? (
           <div className="loading">
@@ -184,6 +201,7 @@ const App = () => {
         ) : (
           <></>
         )}
+
 
         <div className="choices">
           {choices &&

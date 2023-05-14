@@ -88,7 +88,18 @@ area:hover {
   z-index: 1;
   bottom: 0;
   left: 45%;
-  height: 60%;
+  height: 50%;
+  // animation: sprite-move 5s linear infinite; 
+  // animation: walk .5s alternate infinite;
+
+  transform-origin: center;
+}
+.sprite2 {
+  position: absolute;
+  z-index: 1;
+  bottom: 25%;
+  left: 60%;
+  height: 20%;
   // animation: sprite-move 5s linear infinite; 
   // animation: walk .5s alternate infinite;
 
