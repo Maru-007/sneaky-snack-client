@@ -3,15 +3,24 @@ import React, { useState } from "react";
 import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
+
 import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
 import PlayerOne from "./Components/Child/Child";
 import PlayerTwo from "./Components/Dog/Dog"
-
+import Room from "./Room";
 
 import PlaySound from "./Sound";
-
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import PlaySound from "./Sound";
+import TypingComponent from "./Typewriter";
 import Lobby from "./Components/Lobby"
 import { socket } from "./socket";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+// import Typewriter from "typewriter-effect";
+// import VolumeDown from "@mui/icons-material/VolumeDown";
+// import VolumeUp from "@mui/icons-material/VolumeUp";
 
 
 const rooms = [
@@ -29,6 +38,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([])
   // const [player, setPlayer] = useState("Melis");
@@ -82,7 +92,6 @@ const App = () => {
       
         <>
           
-  
           {!isStartButtonClicked && (
             <div className="startbtn">
               {/* <button className="choiceButton" onClick={handleReady}>
@@ -100,6 +109,7 @@ const App = () => {
             setViewBanner={setViewBanner}
             handleLoading={handleLoading}
           />
+
           :
           <></>
         }
