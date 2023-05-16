@@ -3,13 +3,20 @@ import { EVENT_NAMES } from "../../utils";
 import bannerImage from "../../Banner.png";
 import Room from "../../Room";
 import Paper from "@mui/material/Paper";
+import PlaySound from "../../Sound/index";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
 import TypingComponent from "../../Typewriter";
-const PlayerTwo = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoading, socket}) => {
+const PlayerTwo = ({rooms, viewBanner, setViewBanner, handleLoading, socket}) => {
     const [dogIsConnected, setDogIsConnected] = useState(false);
     const [dogQuestion, setDogQuestion] = useState("");
     const [dogChoices, setDogChoices] = useState([]);
     const [dogMessage, setDogMessage] = useState("");
     const [dogCurrentRoom, setDogCurrentRoom] = useState("kidsroom");
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [volume, setVolume] = useState(20);
+    const [doorSound, setDoorSound] = useState(false);
     
     const [displayRoom, setDisplayRoom] = useState(false);
     useEffect(() => {
@@ -61,10 +68,46 @@ const PlayerTwo = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         setDogCurrentRoom(room);
         console.log(room);
     };
+
+    const handleVolume = (event, volume) => {
+      event.preventDefault();
+      setVolume(volume);
+    };
+  
+    
     return (
         <div>
         <p>{dogIsConnected ? "connected" : "not connected"}</p>
         
+        <Box sx={{ width: 150, ml: "10px" }}>
+        <Stack
+          spacing={1}
+          direction="column"
+          sx={{ mb: 1 }}
+          alignItems="center"
+        >
+          <button
+            className="choiceButton"
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {!isPlaying ? "Play Music" : "Stop Music"}
+          </button>
+          <Slider
+            aria-label="Volume"
+            value={volume}
+            onChange={handleVolume}
+            step={10}
+            marks
+            min={0}
+            max={100}
+            color="secondary"
+          />
+        </Stack>
+      </Box>
+      <br></br>
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
+  
     
         <br></br>
     

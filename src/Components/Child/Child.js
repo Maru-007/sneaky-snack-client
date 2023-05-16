@@ -4,14 +4,23 @@ import { EVENT_NAMES } from "../../utils";
 import bannerImage from "../../Banner.png";
 import Room from "../../Room";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+import PlaySound from "../../Sound/index";
 import TypingComponent from "../../Typewriter";
-const PlayerOne = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoading, socket}) => {
+const PlayerOne = ({rooms, viewBanner, setViewBanner, handleLoading, socket}) => {
     const [isConnected, setIsConnected] = useState(false);
     const [question, setQuestion] = useState("");
     const [choices, setChoices] = useState([]);
     const [message, setMessage] = useState("");
     const [currentRoom, setCurrentRoom] = useState("kidsroom");
     const [displayRoom, setDisplayRoom] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [volume, setVolume] = useState(20);
+    const [doorSound, setDoorSound] = useState(false);
+    const [item, setItem] = useState('');
+
     console.log(socket)
     useEffect(() => {
         function handleConnect() {
@@ -43,6 +52,18 @@ const PlayerOne = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         });
         socket.on(EVENT_NAMES.message, (message) => {
           console.log(message);
+          if (message.includes('backpack')){
+            setItem('backpack');
+            setTimeout(() => {
+              setItem('');
+            }, 2000);
+          }
+          if (message.includes('stepstool')){
+            setItem('stepstool');
+            setTimeout(() => {
+              setItem('');
+            }, 2000);
+          }
           setMessage(message);
         });
         
@@ -75,11 +96,46 @@ const PlayerOne = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         socket.emit(EVENT_NAMES.selection, room);
         setCurrentRoom(room);
         console.log(room);
-    
       };
+
+      const handleVolume = (event, volume) => {
+        event.preventDefault();
+        setVolume(volume);
+      };
+  
+      
       return (
         <div>
             <p>{isConnected ? "connected" : "not connected"}</p>
+            <Box sx={{ width: 150, ml: "10px" }}>
+        <Stack
+          spacing={1}
+          direction="column"
+          sx={{ mb: 1 }}
+          alignItems="center"
+        >
+          <button
+            className="choiceButton"
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {!isPlaying ? "Play Music" : "Stop Music"}
+          </button>
+          <Slider
+            aria-label="Volume"
+            value={volume}
+            onChange={handleVolume}
+            step={10}
+            marks
+            min={0}
+            max={100}
+            color="secondary"
+          />
+        </Stack>
+      </Box>
+      <br></br>
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} item={item}/>
+  
             <br></br>
             {viewBanner && (
                 <>

@@ -9,14 +9,14 @@ import PlayerOne from "./Components/Child/Child";
 import PlayerTwo from "./Components/Dog/Dog"
 import Room from "./Room";
 
-import PlaySound from "./Sound";
-import Box from "@mui/material/Box";
+// import PlaySound from "./Sound";
+// import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import TypingComponent from "./Typewriter";
 import Lobby from "./Components/Lobby"
 import { socket } from "./socket";
-import Stack from "@mui/material/Stack";
-import Slider from "@mui/material/Slider";
+// import Stack from "@mui/material/Stack";
+// import Slider from "@mui/material/Slider";
 // import Typewriter from "typewriter-effect";
 // import VolumeDown from "@mui/icons-material/VolumeDown";
 // import VolumeUp from "@mui/icons-material/VolumeUp";
@@ -34,10 +34,10 @@ const rooms = [
 
 const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [doorSound, setDoorSound] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
+  // const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
-  const [volume, setVolume] = useState(20);
+  // const [volume, setVolume] = useState(20);
   const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([])
   // const [player, setPlayer] = useState("Melis");
@@ -66,11 +66,6 @@ const App = () => {
     console.log(playerTwo)
   }
 
-  const handleVolume = (event, volume) => {
-    event.preventDefault();
-    setVolume(volume);
-  };
-  
 
   return (
     <div>
@@ -83,7 +78,7 @@ const App = () => {
       />
       
       
-      <Box sx={{ width: 150, ml: "10px" }}>
+      {/* <Box sx={{ width: 150, ml: "10px" }}>
         <Stack
           spacing={1}
           direction="column"
@@ -110,7 +105,7 @@ const App = () => {
       </Box>
       <br></br>
 
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} /> */}
   
       
         <>
@@ -128,7 +123,6 @@ const App = () => {
             socket={playerOne}
             rooms={rooms} 
             viewBanner={viewBanner} 
-            setDoorSound={setDoorSound}
             setViewBanner={setViewBanner}
             handleLoading={handleLoading}
           />
@@ -142,7 +136,6 @@ const App = () => {
             socket={playerTwo}
             rooms={rooms} 
             viewBanner={viewBanner} 
-            setDoorSound={setDoorSound}
             setViewBanner={setViewBanner}
             handleLoading={handleLoading}
           />
