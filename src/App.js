@@ -3,9 +3,18 @@ import "./App.scss";
 import bannerImage from "./Banner.png";
 import loadingSpinner from "./assets/rainbow-spinner-loading.gif";
 import PlayerOne from "./Components/Child/Child";
-import PlayerTwo from "./Components/Dog/Dog";
+
+import PlayerTwo from "./Components/Dog/Dog"
+import Room from "./Room";
+
 import PlaySound from "./Sound";
-import Lobby from "./Components/Lobby";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import TypingComponent from "./Typewriter";
+import Lobby from "./Components/Lobby"
+import { socket } from "./socket";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
 // import Typewriter from "typewriter-effect";
 // import VolumeDown from "@mui/icons-material/VolumeDown";
 // import VolumeUp from "@mui/icons-material/VolumeUp";
@@ -27,6 +36,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+  const [volume, setVolume] = useState(20);
   const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
@@ -56,7 +66,7 @@ const App = () => {
     playerTwo = socketConnection[1][0];
     console.log(playerTwo);
   }
-
+  
   useEffect(() => {
     socket.on(EVENT_NAMES.promptsGenerated, handleLoading);
     socket.on(EVENT_NAMES.startButton, () => setIsStartButtonClicked(true));
@@ -65,6 +75,11 @@ const App = () => {
   const handleStart = (socket) => {
     socket.emit(EVENT_NAMES.startGame);
   };
+  const handleVolume = (event, volume) => {
+    event.preventDefault();
+    setVolume(volume);
+  };
+  
 
   return (
     <div>
@@ -81,17 +96,6 @@ const App = () => {
 
       <br></br>
 
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
-
-      {/* {!isStartButtonClicked && selectedPlayers.length > 0 ? (
-        <div>
-          <button className="startbtn" onClick={() => handleStart(socket)}>
-            Start Game
-          </button>
-        </div>
-      ) : (
-        <></>
-      )} */}
       {isStartButtonClicked === false ? (
         <div>
           <button
@@ -106,6 +110,37 @@ const App = () => {
         <></>
       )}
       {viewBanner && (
+      
+      <Box sx={{ width: 150, ml: "10px" }}>
+        <Stack
+          spacing={1}
+          direction="column"
+          sx={{ mb: 1 }}
+          alignItems="center"
+        >
+          <button
+            className="choiceButton"
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {!isPlaying ? "Play Music" : "Stop Music"}
+          </button>
+          <Slider
+            aria-label="Volume"
+            value={volume}
+            onChange={handleVolume}
+            step={10}
+            marks
+            min={0}
+            max={100}
+            color="secondary"
+          />
+        </Stack>
+      </Box>
+      <br></br>
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
+  
+      
         <>
           <div className="banner">
             <img src={bannerImage} alt="banner" />
