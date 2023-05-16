@@ -6,24 +6,30 @@
 // #f5ce97 - Tan/Light orange
 // #fff3d1 - Cream
 // #ffffff - White
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:wght@300;400&display=swap');
 
 body {
   background-color: rgb(194, 157, 210);
   cursor: url("./assets/cookie.png"), auto;
 }
+
 #root {
   display: flex;
-  font: 0.9rem sans-serif;
+  font: 1rem 'Roboto Mono', monospace;
+  font-weight: 500;
   flex-direction: column;
   height: 100%;
 }
+
 .banner > img {
   border-radius: 30px;
   display: flex;
   margin: auto;
   width: 60%;
 }
+
 .textboxHolder {
+  margin-top: -20px;
   display: flex;
   justify-content: center;
 }
@@ -33,18 +39,23 @@ body {
   font-size: 20px;
   padding: 10px;
 }
+
 .choices,
 .startbtn {
   display: flex;
   justify-content: center;
   gap: 10px;
+  font: 1rem 'Roboto Mono', monospace;
 }
+
 .choiceButton {
+  font: 1rem 'Roboto Mono', monospace;
+  line-height: 1;
+  font-weight: bolder;
   border-color: #ffffff00;
   border-radius: 40px;
-  width: 7rem;
-  height: 2rem;
-  font-size: 15px;
+  width: 9rem;
+  height: 3rem;
   background-color: #eec50f;
   &:hover {
     cursor: pointer;

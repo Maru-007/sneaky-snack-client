@@ -5,10 +5,14 @@ import "./App.scss";
 import bannerImage from "./Banner.png";
 import Room from "./Room";
 // import Typewriter from "typewriter-effect";
-// import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import PlaySound from "./Sound";
 import TypingComponent from "./Typewriter";
+import Stack from "@mui/material/Stack";
+import Slider from "@mui/material/Slider";
+// import VolumeDown from "@mui/icons-material/VolumeDown";
+// import VolumeUp from "@mui/icons-material/VolumeUp";
 
 const rooms = [
   "kidsroom",
@@ -31,6 +35,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+  const [volume, setVolume] = useState(20);
 
   useEffect(() => {
     function handleConnect() {
@@ -77,8 +82,6 @@ const App = () => {
     setIsStartButtonClicked(true);
   };
 
-
-
   const handleChoice = (choice) => {
     setMessage("");
     console.log(choice);
@@ -99,25 +102,51 @@ const App = () => {
     socket.emit(EVENT_NAMES.selection, room);
     setCurrentRoom(room);
     console.log(room);
-  }
-  
- 
+  };
+
+  const handleVolume = (event, volume) => {
+    event.preventDefault();
+    setVolume(volume);
+  };
+
   return (
     <div>
-      <p>{isConnected ? "connected" : "not connected"}</p>
-
-      <button onClick={() => setIsPlaying(!isPlaying)}>
-        {!isPlaying ? "play music" : "stop music"}
-      </button>
-
+      <Box sx={{ width: 150, ml: "10px" }}>
+        <Stack
+          spacing={1}
+          direction="column"
+          sx={{ mb: 1 }}
+          alignItems="center"
+        >
+          <button className="choiceButton">
+            {isConnected ? "Connected" : "Not Connected"}
+          </button>
+          <button
+            className="choiceButton"
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {!isPlaying ? "Play Music" : "Stop Music"}
+          </button>
+          <Slider
+            aria-label="Volume"
+            value={volume}
+            onChange={handleVolume}
+            step={10}
+            marks
+            min={0}
+            max={100}
+            color="secondary"
+          />
+        </Stack>
+      </Box>
       <br></br>
 
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
 
       {viewBanner && (
         <>
           <div className="banner">
-            <img  src={bannerImage} alt="banner" /> 
+            <img src={bannerImage} alt="banner" />
           </div>
           <br></br>
 
@@ -128,7 +157,6 @@ const App = () => {
               </button>
             </div>
           )}
-
         </>
       )}
 
@@ -145,48 +173,36 @@ const App = () => {
         <br></br>
 
         <div className="textboxHolder">
-
-
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              question.message ? 
+          <Paper className="textbox" elevation={3} align="left">
+            {question.message ? (
               <TypingComponent question={question.message}></TypingComponent>
-              :
+            ) : (
               <></>
-
-            }
-
+            )}
           </Paper>
         </div>
         <br></br>
-        
-        { message ? 
 
+        {message ? (
           <div className="textboxHolder">
-
-              
-          <Paper className='textbox'elevation={3} align='left'>
-            {
-              // message ? 
-              <TypingComponent question={message}></TypingComponent>
-              // :
-              // <></>
-
-            }
-            
-          
-            
-          </Paper>
-        </div>
-        : <></>
-        }
+            <Paper className="textbox" elevation={3} align="left">
+              {
+                // message ?
+                <TypingComponent question={message}></TypingComponent>
+                // :
+                // <></>
+              }
+            </Paper>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className="choices">
           {choices &&
             choices.map((choice) => (
               <button
                 className="choiceButton"
-                
                 key={choice}
                 value={choice}
                 onClick={(e) => handleChoice(choice)}
