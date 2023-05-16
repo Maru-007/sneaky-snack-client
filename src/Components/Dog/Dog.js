@@ -57,7 +57,7 @@ const PlayerTwo = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         console.log(dogCurrentRoom);
     };
     const handleDogNav = (room) => {
-        socket.emit(EVENT_NAMES.selection, room);
+        socket.emit(EVENT_NAMES.dogSelection, room);
         setDogCurrentRoom(room);
         console.log(room);
     };
