@@ -23,9 +23,9 @@ const Lobby = ({socketConnection, selectedPlayers, onPlayersChange, setSocketCon
     socket.emit(EVENT_NAMES.dogReady);
     setSocketConnection([...socketConnection, [socket, player]])
   }
-  const handleStart = (socket) => {
-    socket.emit(EVENT_NAMES.startGame)
-  }
+  // const handleStart = (socket) => {
+  //   socket.emit(EVENT_NAMES.startGame)
+  // }
   return (
     <div>
       <h2>Lobby</h2>
@@ -44,13 +44,13 @@ const Lobby = ({socketConnection, selectedPlayers, onPlayersChange, setSocketCon
         </button>
       </div>
       <div>
-        <button
+        {/* <button
             className="startbtn"
             disabled={selectedPlayers.length === 0}
             onClick={() => handleStart(socket)}
         >
           Start Game
-        </button>
+        </button> */}
       </div>
     
     </div>

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-
-import { EVENT_NAMES } from "./utils";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import bannerImage from "./Banner.png";
-
-import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
+import loadingSpinner from "./assets/rainbow-spinner-loading.gif";
 import PlayerOne from "./Components/Child/Child";
+
 import PlayerTwo from "./Components/Dog/Dog"
 import Room from "./Room";
 
@@ -20,7 +18,8 @@ import Slider from "@mui/material/Slider";
 // import Typewriter from "typewriter-effect";
 // import VolumeDown from "@mui/icons-material/VolumeDown";
 // import VolumeUp from "@mui/icons-material/VolumeUp";
-
+import { socket } from "./socket";
+import { EVENT_NAMES } from "./utils";
 
 const rooms = [
   "kidsroom",
@@ -39,33 +38,43 @@ const App = () => {
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
   const [volume, setVolume] = useState(20);
   const [loading, setLoading] = useState(true);
-  const [socketConnection, setSocketConnection] = useState([])
-  // const [player, setPlayer] = useState("Melis");
+  const [socketConnection, setSocketConnection] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+
   const handlePlayersChange = (newSelectedPlayers) => {
     setSelectedPlayers(newSelectedPlayers);
   };
-  console.log(socketConnection)
+  console.log(socketConnection);
+
   const handleLoading = () => {
     setLoading(false);
   };
+
   let playerOne;
   let playerTwo;
-  if (socketConnection[0] && socketConnection[0].includes('Melis')) {
-    playerOne = socketConnection[0][0]
-    console.log(playerOne)
-  } else if (socketConnection[1] && socketConnection[1].includes('Melis')) {
-    playerOne = socketConnection[1][0]
-    console.log(playerOne)
+  if (socketConnection[0] && socketConnection[0].includes("Melis")) {
+    playerOne = socketConnection[0][0];
+    console.log(playerOne);
+  } else if (socketConnection[1] && socketConnection[1].includes("Melis")) {
+    playerOne = socketConnection[1][0];
+    console.log(playerOne);
   }
-  if (socketConnection[0] && socketConnection[0].includes('Diego')) {
-    playerTwo = socketConnection[0][0]
-    console.log(playerTwo)
-  } else if (socketConnection[1] && socketConnection[1].includes('Diego')) {
-    playerTwo = socketConnection[1][0]
-    console.log(playerTwo)
+  if (socketConnection[0] && socketConnection[0].includes("Diego")) {
+    playerTwo = socketConnection[0][0];
+    console.log(playerTwo);
+  } else if (socketConnection[1] && socketConnection[1].includes("Diego")) {
+    playerTwo = socketConnection[1][0];
+    console.log(playerTwo);
   }
+  
+  useEffect(() => {
+    socket.on(EVENT_NAMES.promptsGenerated, handleLoading);
+    socket.on(EVENT_NAMES.startButton, () => setIsStartButtonClicked(true));
+  }, []);
 
+  const handleStart = (socket) => {
+    socket.emit(EVENT_NAMES.startGame);
+  };
   const handleVolume = (event, volume) => {
     event.preventDefault();
     setVolume(volume);
@@ -74,14 +83,33 @@ const App = () => {
 
   return (
     <div>
-
       <Lobby
-            socketConnection={socketConnection}
-            selectedPlayers={selectedPlayers} 
-            onPlayersChange={handlePlayersChange}
-            setSocketConnection={setSocketConnection}
+        socketConnection={socketConnection}
+        selectedPlayers={selectedPlayers}
+        onPlayersChange={handlePlayersChange}
+        setSocketConnection={setSocketConnection}
       />
-      
+
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "play music" : "stop music"}
+      </button>
+
+      <br></br>
+
+      {isStartButtonClicked === false ? (
+        <div>
+          <button
+            className="startbtn"
+            disabled={selectedPlayers.length === 0}
+            onClick={() => handleStart(socket)}
+          >
+            Start Game
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
+      {viewBanner && (
       
       <Box sx={{ width: 150, ml: "10px" }}>
         <Stack
@@ -114,47 +142,43 @@ const App = () => {
   
       
         <>
-          
-          {!isStartButtonClicked && (
-            <div className="startbtn">
-              {/* <button className="choiceButton" onClick={handleReady}>
-                Start
-              </button> */}
-            </div>
-          )}
+          <div className="banner">
+            <img src={bannerImage} alt="banner" />
+          </div>
+          <br></br>
         </>
-        { selectedPlayers.includes('child') && playerOne ?
-          <PlayerOne 
-            socket={playerOne}
-            rooms={rooms} 
-            viewBanner={viewBanner} 
-            setDoorSound={setDoorSound}
-            setViewBanner={setViewBanner}
-            handleLoading={handleLoading}
-          />
+      )}
 
-          :
-          <></>
-        }
+      
 
-        { selectedPlayers.includes('dog') && playerTwo ?
-          <PlayerTwo 
-            socket={playerTwo}
-            rooms={rooms} 
-            viewBanner={viewBanner} 
-            setDoorSound={setDoorSound}
-            setViewBanner={setViewBanner}
-            handleLoading={handleLoading}
-          />
-          :
-          <></>
-        }
-      
-      
-  
-      
+      {selectedPlayers.includes("child") && playerOne ? (
+        <PlayerOne
+          socket={playerOne}
+          rooms={rooms}
+          viewBanner={viewBanner}
+          setDoorSound={setDoorSound}
+          setViewBanner={setViewBanner}
+          handleLoading={handleLoading}
+        />
+      ) : (
+        <></>
+      )}
+
+      {selectedPlayers.includes("dog") && playerTwo && loading === false ? (
+        <PlayerTwo
+          socket={playerTwo}
+          rooms={rooms}
+          viewBanner={viewBanner}
+          setDoorSound={setDoorSound}
+          setViewBanner={setViewBanner}
+          handleLoading={handleLoading}
+        />
+      ) : (
+        <></>
+      )}
+
       {/* loading indicator */}
-      {loading === true && isStartButtonClicked === true ? (
+      {loading === true && socketConnection.length ? (
         <div className="loading">
           <img className="spinner" src={loadingSpinner} alt="loading" />
           <p>Loading...</p>
