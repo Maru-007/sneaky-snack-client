@@ -1,6 +1,9 @@
 import React from "react";
 
 import MelisSprite from "./Melis-sprite.png"
+
+import DiegoSprite from "./pixil-frame-0.png"
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 //Size 1: max-width: 2560px
@@ -179,6 +182,9 @@ const Room = ({ currentRoom, handleNav }) => {
   const { areas } = roomInfo[currentRoom];
   const room = `${currentRoom}.png`;
 
+  console.log(currentRoom)
+
+
 const isMacScreen = useMediaQuery("(min-width: 2560px)");
 
   return (
@@ -192,6 +198,7 @@ const isMacScreen = useMediaQuery("(min-width: 2560px)");
         />
 
       <img className="sprite" src={MelisSprite} alt="Melis's sprite" />
+      <img className="sprite2" src={DiegoSprite} alt="Diego's sprite"/>
 
       <map name="image-map">
         {areas.map((area) => (

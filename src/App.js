@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { socket } from "./socket";
+import React, { useState } from "react";
+
 import { EVENT_NAMES } from "./utils";
 import "./App.scss";
 import bannerImage from "./Banner.png";
+
+import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
+import PlayerOne from "./Components/Child/Child";
+import PlayerTwo from "./Components/Dog/Dog"
 import Room from "./Room";
-// import Typewriter from "typewriter-effect";
+
+import PlaySound from "./Sound";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import PlaySound from "./Sound";
 import TypingComponent from "./Typewriter";
+import Lobby from "./Components/Lobby"
+import { socket } from "./socket";
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
+// import Typewriter from "typewriter-effect";
 // import VolumeDown from "@mui/icons-material/VolumeDown";
 // import VolumeUp from "@mui/icons-material/VolumeUp";
+
 
 const rooms = [
   "kidsroom",
@@ -25,193 +34,111 @@ const rooms = [
 ];
 
 const App = () => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [question, setQuestion] = useState("");
-  const [choices, setChoices] = useState([]);
-  const [message, setMessage] = useState("");
   const [viewBanner, setViewBanner] = useState(true);
-  const [currentRoom, setCurrentRoom] = useState("kidsroom");
-  const [displayRoom, setDisplayRoom] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
-  const [volume, setVolume] = useState(20);
 
-  useEffect(() => {
-    function handleConnect() {
-      setIsConnected(true);
-      console.log("handleConnect has been triggered");
-      setQuestion("");
-      setChoices([]);
-    }
-
-    function handleDisconnect() {
-      setIsConnected(false);
-      console.log("handleDisconnect has been triggered");
-      setQuestion("");
-      setChoices([]);
-    }
-
-    // these are our listeners
-    socket.on("connect", handleConnect);
-    socket.on("disconnect", handleDisconnect);
-    socket.on("response", (payload) => console.log(payload));
-    socket.on(EVENT_NAMES.questionsReady, (question) => {
-      setQuestion(question);
-      setChoices(question.choices);
-      console.log(question);
-      console.log(question.choices);
-    });
-
-    socket.on(EVENT_NAMES.message, (message) => {
-      console.log(message);
-      setMessage(message);
-    });
-    // clean up the socket listeners
-    return () => {
-      // turns off socket listeners
-      socket.off("connect", handleConnect);
-      socket.off("disconnect", handleDisconnect);
-      socket.off("response", () => console.log("response listener is off"));
-    };
-  }, []);
-
-  const handleReady = () => {
-    socket.emit(EVENT_NAMES.childReady);
-    setIsPlaying(true);
-    setIsStartButtonClicked(true);
+  const [loading, setLoading] = useState(true);
+  const [socketConnection, setSocketConnection] = useState([])
+  // const [player, setPlayer] = useState("Melis");
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const handlePlayersChange = (newSelectedPlayers) => {
+    setSelectedPlayers(newSelectedPlayers);
   };
-
-  const handleChoice = (choice) => {
-    setMessage("");
-    console.log(choice);
-    socket.emit(EVENT_NAMES.selection, choice);
-    setViewBanner(false);
-    setDisplayRoom(true);
-
-    if (rooms.includes(choice)) {
-      setCurrentRoom(choice);
-      setDoorSound(true);
-    } else {
-      setDoorSound(false);
-    }
-    console.log(currentRoom);
+  console.log(socketConnection)
+  const handleLoading = () => {
+    setLoading(false);
   };
+  let playerOne;
+  let playerTwo;
+  if (socketConnection[0] && socketConnection[0].includes('Melis')) {
+    playerOne = socketConnection[0][0]
+    console.log(playerOne)
+  } else if (socketConnection[1] && socketConnection[1].includes('Melis')) {
+    playerOne = socketConnection[1][0]
+    console.log(playerOne)
+  }
+  if (socketConnection[0] && socketConnection[0].includes('Diego')) {
+    playerTwo = socketConnection[0][0]
+    console.log(playerTwo)
+  } else if (socketConnection[1] && socketConnection[1].includes('Diego')) {
+    playerTwo = socketConnection[1][0]
+    console.log(playerTwo)
+  }
 
-  const handleNav = (room) => {
-    socket.emit(EVENT_NAMES.selection, room);
-    setCurrentRoom(room);
-    console.log(room);
-  };
-
-  const handleVolume = (event, volume) => {
-    event.preventDefault();
-    setVolume(volume);
-  };
+  
+  
 
   return (
     <div>
-      <Box sx={{ width: 150, ml: "10px" }}>
-        <Stack
-          spacing={1}
-          direction="column"
-          sx={{ mb: 1 }}
-          alignItems="center"
-        >
-          <button className="choiceButton">
-            {isConnected ? "Connected" : "Not Connected"}
-          </button>
-          <button
-            className="choiceButton"
-            onClick={() => setIsPlaying(!isPlaying)}
-          >
-            {!isPlaying ? "Play Music" : "Stop Music"}
-          </button>
-          <Slider
-            aria-label="Volume"
-            value={volume}
-            onChange={handleVolume}
-            step={10}
-            marks
-            min={0}
-            max={100}
-            color="secondary"
-          />
-        </Stack>
-      </Box>
+
+      <Lobby
+            socketConnection={socketConnection}
+            selectedPlayers={selectedPlayers} 
+            onPlayersChange={handlePlayersChange}
+            setSocketConnection={setSocketConnection}
+      />
+      
+      
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "play music" : "stop music"}
+      </button>
+  
       <br></br>
-
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
-
-      {viewBanner && (
+  
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
+  
+      
         <>
-          <div className="banner">
-            <img src={bannerImage} alt="banner" />
-          </div>
-          <br></br>
-
+          
           {!isStartButtonClicked && (
             <div className="startbtn">
-              <button className="choiceButton" onClick={handleReady}>
+              {/* <button className="choiceButton" onClick={handleReady}>
                 Start
-              </button>
+              </button> */}
             </div>
           )}
         </>
-      )}
-
-      <div>
-        {displayRoom && (
-          <Room
-            currentRoom={currentRoom}
-            handleChoice={handleChoice}
-            rooms={rooms}
-            handleNav={handleNav}
+        { selectedPlayers.includes('child') && playerOne ?
+          <PlayerOne 
+            socket={playerOne}
+            rooms={rooms} 
+            viewBanner={viewBanner} 
+            setDoorSound={setDoorSound}
+            setViewBanner={setViewBanner}
+            handleLoading={handleLoading}
           />
-        )}
 
-        <br></br>
-
-        <div className="textboxHolder">
-          <Paper className="textbox" elevation={3} align="left">
-            {question.message ? (
-              <TypingComponent question={question.message}></TypingComponent>
-            ) : (
-              <></>
-            )}
-          </Paper>
-        </div>
-        <br></br>
-
-        {message ? (
-          <div className="textboxHolder">
-            <Paper className="textbox" elevation={3} align="left">
-              {
-                // message ?
-                <TypingComponent question={message}></TypingComponent>
-                // :
-                // <></>
-              }
-            </Paper>
-          </div>
-        ) : (
+          :
           <></>
-        )}
+        }
 
-        <div className="choices">
-          {choices &&
-            choices.map((choice) => (
-              <button
-                className="choiceButton"
-                key={choice}
-                value={choice}
-                onClick={(e) => handleChoice(choice)}
-              >
-                {choice}
-              </button>
-            ))}
+        { selectedPlayers.includes('dog') && playerTwo ?
+          <PlayerTwo 
+            socket={playerTwo}
+            rooms={rooms} 
+            viewBanner={viewBanner} 
+            setDoorSound={setDoorSound}
+            setViewBanner={setViewBanner}
+            handleLoading={handleLoading}
+          />
+          :
+          <></>
+        }
+      
+      
+  
+      
+      {/* loading indicator */}
+      {loading === true && isStartButtonClicked === true ? (
+        <div className="loading">
+          <img className="spinner" src={loadingSpinner} alt="loading" />
+          <p>Loading...</p>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
