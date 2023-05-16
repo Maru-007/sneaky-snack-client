@@ -12,7 +12,6 @@ import Room from "./Room";
 import PlaySound from "./Sound";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import PlaySound from "./Sound";
 import TypingComponent from "./Typewriter";
 import Lobby from "./Components/Lobby"
 import { socket } from "./socket";
@@ -38,7 +37,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [doorSound, setDoorSound] = useState(false);
   const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
-
+  const [volume, setVolume] = useState(20);
   const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([])
   // const [player, setPlayer] = useState("Melis");
@@ -67,7 +66,10 @@ const App = () => {
     console.log(playerTwo)
   }
 
-  
+  const handleVolume = (event, volume) => {
+    event.preventDefault();
+    setVolume(volume);
+  };
   
 
   return (
@@ -81,13 +83,34 @@ const App = () => {
       />
       
       
-      <button onClick={() => setIsPlaying(!isPlaying)}>
-        {!isPlaying ? "play music" : "stop music"}
-      </button>
-  
+      <Box sx={{ width: 150, ml: "10px" }}>
+        <Stack
+          spacing={1}
+          direction="column"
+          sx={{ mb: 1 }}
+          alignItems="center"
+        >
+          <button
+            className="choiceButton"
+            onClick={() => setIsPlaying(!isPlaying)}
+          >
+            {!isPlaying ? "Play Music" : "Stop Music"}
+          </button>
+          <Slider
+            aria-label="Volume"
+            value={volume}
+            onChange={handleVolume}
+            step={10}
+            marks
+            min={0}
+            max={100}
+            color="secondary"
+          />
+        </Stack>
+      </Box>
       <br></br>
-  
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} />
+
+      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} />
   
       
         <>

@@ -185,7 +185,8 @@ const Room = ({ currentRoom, handleNav }) => {
   console.log(currentRoom)
 
 
-const isMacScreen = useMediaQuery("(min-width: 2560px)");
+const isWindows = window.screen.width >= 1920;
+console.log(isWindows)
 
   return (
     <>
@@ -206,7 +207,7 @@ const isMacScreen = useMediaQuery("(min-width: 2560px)");
             key={area.title}
             alt={area.alt}
             title={area.title}
-            coords={isMacScreen ? area.macCoords : area.coords }
+            coords={isWindows ? area.coords : area.macCoords }
             shape={area.shape}
             onClick={(e) => handleNav(e.target.title)}
             />
