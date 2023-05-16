@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { EVENT_NAMES } from "../../utils";
-import bannerImage from "../../Banner.png";
 import Room from "../../Room";
 import Paper from "@mui/material/Paper";
 import TypingComponent from "../../Typewriter";
-const PlayerOne = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoading, socket}) => {
+const PlayerOne = ({rooms, setDoorSound, setViewBanner, socket}) => {
     const [isConnected, setIsConnected] = useState(false);
     const [question, setQuestion] = useState("");
     const [choices, setChoices] = useState([]);
@@ -81,14 +80,14 @@ const PlayerOne = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         <div>
             <p>{isConnected ? "connected" : "not connected"}</p>
             <br></br>
-            {viewBanner && (
+            {/* {viewBanner && (
                 <>
                 <div className="banner">
                     <img src={bannerImage} alt="banner" />
                 </div>
                 <br></br>
                 </>
-            )}
+            )} */}
             
                 <div>
                 {displayRoom ? (

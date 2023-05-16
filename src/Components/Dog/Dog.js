@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { EVENT_NAMES } from "../../utils";
-import bannerImage from "../../Banner.png";
 import Room from "../../Room";
 import Paper from "@mui/material/Paper";
 import TypingComponent from "../../Typewriter";
-const PlayerTwo = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoading, socket}) => {
+const PlayerTwo = ({rooms, setDoorSound, setViewBanner, socket}) => {
     const [dogIsConnected, setDogIsConnected] = useState(false);
     const [dogQuestion, setDogQuestion] = useState("");
     const [dogChoices, setDogChoices] = useState([]);
@@ -69,14 +68,14 @@ const PlayerTwo = ({rooms, viewBanner, setDoorSound, setViewBanner, handleLoadin
         <br></br>
     
     
-        {viewBanner && (
+        {/* {viewBanner && (
           <>
             <div className="banner">
               <img src={bannerImage} alt="banner" />
             </div>
             <br></br>
           </>
-        )}
+        )} */}
     
           <div>
             {displayRoom ? (
