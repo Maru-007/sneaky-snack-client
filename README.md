@@ -2,7 +2,7 @@
 
 ## Sneaky Snacker
 
-Melis, A 7 year old girl is hanging out in her room playing with her toys and her best paw pal “Diego”,  A skew of toys and books cover her floor. She is playing with her favorite toy when… A rumbling occurs, she pauses and realizes that it snack time. The smell of Savory food fills the air, herbs and spices. But Melis does not crave when is on this stove… She wants something sweet a SNACK!
+Melis, A 8 year old girl is hanging out in her room playing with her toys and her best paw pal “Diego”,  A skew of toys and books cover her floor. She is playing with her favorite toy when… A rumbling occurs, she pauses and realizes that it snack time. The smell of Savory food fills the air, herbs and spices. But Melis does not crave when is on this stove… She wants something sweet a SNACK!
 She knows that asking for a snack before dinner is a quick way to get told “NO, dinner is almost ready”, Melis knows this. So she and her doggy Diego decides to em-bark on an epic adventure to find her favorite of all snacks COOKIES! She must quietly move through the house and find the cookie jar. While sneaking from room to room Melis must avoid getting caught! This is where she becomes… a “Sneaky Snacker”
 
 Sneaky Snacker is a kid friendly interactive game where the user has to sneak through their house to find the cookie jar. The main Character “Melis” has to move from room to room while employing a handful of actions that either help her achieve her goal, or lend to her getting caught and left with no Cookies.
