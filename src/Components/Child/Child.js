@@ -112,6 +112,36 @@ const PlayerOne = ({
           setDistraction("");
         }, 2000);
       }
+      if (message.includes("slam")) {
+        setDistraction("slam");
+        setTimeout(() => {
+          setDistraction("");
+        }, 2000);
+      }
+      if (message.includes("cologne")) {
+        setDistraction("cologne");
+        setTimeout(() => {
+          setDistraction("");
+        }, 2000);
+      }
+      if (message.includes("hairdryer")) {
+        setDistraction("hairdryer");
+        setTimeout(() => {
+          setDistraction("");
+        }, 2000);
+      }
+      if (message.includes("alarm")) {
+        setDistraction("alarm");
+        setTimeout(() => {
+          setDistraction("");
+        }, 2000);
+      }
+      if (message.includes("thermostat")) {
+        setDistraction("thermostat");
+        setTimeout(() => {
+          setDistraction("");
+        }, 2000);
+      }
       setMessage(message);
     });
 
@@ -191,6 +221,7 @@ const PlayerOne = ({
         item={item}
         winState={winState}
         loseState={loseState}
+        distract={distract}
       />
 
       <br></br>

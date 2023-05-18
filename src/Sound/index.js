@@ -19,6 +19,18 @@ import childwin from "./audioFiles/childwin.wav";
 import lose from "./audioFiles/lose.wav";
 import negative from "./audioFiles/negative.mp3";
 import dogwin from "./audioFiles/dogwin.wav";
+import stereo from "./audioFiles/stereo.wav";
+import slam from "./audioFiles/slam.wav";
+import cologne from "./audioFiles/cologne.wav";
+import hairdryer from "./audioFiles/hairdryer.wav";
+import alarm from "./audioFiles/alarm.wav";
+import thermostat from "./audioFiles/thermostat.wav";
+import pillow from "./audioFiles/pillow.wav";
+import bowl from "./audioFiles/bowl.wav";
+import bark from "./audioFiles/bark.wav";
+import roomba from "./audioFiles/roomba.wav"
+import mouse from "./audioFiles/mouse.wav"
+import flowerpot from "./audioFiles/flowerpot.wav"
 
 const PlaySound = ({
   isPlaying,
@@ -27,7 +39,9 @@ const PlaySound = ({
   item,
   dogItem,
   winState,
-  loseState
+  loseState,
+  distract,
+  dogDistract
 }) => {
   return (
     <div>
@@ -103,6 +117,42 @@ const PlaySound = ({
           <Sound url={lose} playStatus={Sound.status.PLAYING} volume={35} />
           <Sound url={negative} playStatus={Sound.status.PLAYING} volume={35} />
         </>
+      )}
+      {distract === "stereo" && (
+        <Sound url={stereo} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {distract === "slam" && (
+        <Sound url={slam} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {distract === "cologne" && (
+        <Sound url={cologne} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+       {distract === "hairdryer" && (
+        <Sound url={hairdryer} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {distract === "alarm" && (
+        <Sound url={alarm} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {distract === "thermostat" && (
+        <Sound url={thermostat} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {dogDistract === "pillow" && (
+        <Sound url={pillow} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+       {dogDistract === "bowl" && (
+        <Sound url={bowl} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+         {dogDistract === "murderers" && (
+        <Sound url={bark} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+      {dogDistract === "roomba" && (
+        <Sound url={roomba} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+        {dogDistract === "mouse" && (
+        <Sound url={mouse} playStatus={Sound.status.PLAYING} volume={35} />
+      )}
+        {dogDistract === "flower pot" && (
+        <Sound url={flowerpot} playStatus={Sound.status.PLAYING} volume={35} />
       )}
     </div>
   );

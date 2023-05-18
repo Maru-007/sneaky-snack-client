@@ -27,6 +27,7 @@ const PlayerTwo = ({
   const [displayRoom, setDisplayRoom] = useState(false);
   const [winState, setWinState] = useState(false);
   const [loseState, setLoseState] = useState(false);
+  const [dogDistract, setDogDistraction] = useState("");
 
   useEffect(() => {
     socket.on("dogConnect", handleDogConnect);
@@ -87,6 +88,42 @@ const PlayerTwo = ({
         setDogItem("tennis ball");
         setTimeout(() => {
           setDogItem("");
+        }, 2000);
+      }
+      if (message.includes("pillow")) {
+        setDogDistraction("pillow");
+        setTimeout(() => {
+          setDogDistraction("");
+        }, 2000);
+      }
+      if (message.includes("bowl")) {
+        setDogDistraction("bowl");
+        setTimeout(() => {
+          setDogDistraction("");
+        }, 2000);
+      }
+      if (message.includes("murderers")) {
+        setDogDistraction("murderers");
+        setTimeout(() => {
+          setDogDistraction("");
+        }, 2000);
+      }
+      if (message.includes("roomba")) {
+        setDogDistraction("roomba");
+        setTimeout(() => {
+          setDogDistraction("");
+        }, 2000);
+      }
+      if (message.includes("mouse")) {
+        setDogDistraction("mouse");
+        setTimeout(() => {
+          setDogDistraction("");
+        }, 2000);
+      }
+      if (message.includes("flower pot")) {
+        setDogDistraction("flower pot");
+        setTimeout(() => {
+          setDogDistraction("");
         }, 2000);
       }
     });
@@ -173,6 +210,7 @@ const PlayerTwo = ({
         dogItem={dogItem}
         winState={winState}
         loseState={loseState}
+        dogDistract={dogDistract}
       />
 
       <br></br>
