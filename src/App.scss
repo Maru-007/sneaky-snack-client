@@ -6,7 +6,7 @@
 // #f5ce97 - Tan/Light orange
 // #fff3d1 - Cream
 // #ffffff - White
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Mono:wght@300;400&display=swap");
 
 body {
   background-color: rgb(194, 157, 210);
@@ -15,7 +15,7 @@ body {
 
 #root {
   display: flex;
-  font: 1rem 'Roboto Mono', monospace;
+  font: 1rem "Roboto Mono", monospace;
   font-weight: 500;
   flex-direction: column;
   height: 100%;
@@ -45,11 +45,12 @@ body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font: 1rem 'Roboto Mono', monospace;
+  font: 1rem "Roboto Mono", monospace;
 }
 
+
 .choiceButton {
-  font: 1rem 'Roboto Mono', monospace;
+  font: 1rem "Roboto Mono", monospace;
   line-height: 1;
   font-weight: bolder;
   border-color: #ffffff00;
@@ -66,14 +67,14 @@ body {
 .loading {
   width: 100%;
   display: flex;
-align-items:center;
-justify-content: center;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-size: 2em;
-  gap:10px;
+  gap: 10px;
 }
 
-.spinner{
+.spinner {
   width: 3em;
 }
 
@@ -100,7 +101,7 @@ area:hover {
   bottom: 0;
   left: 45%;
   height: 50%;
-  // animation: sprite-move 5s linear infinite; 
+  // animation: sprite-move 5s linear infinite;
   // animation: walk .5s alternate infinite;
 
   transform-origin: center;
@@ -111,7 +112,7 @@ area:hover {
   bottom: 25%;
   left: 60%;
   height: 20%;
-  // animation: sprite-move 5s linear infinite; 
+  // animation: sprite-move 5s linear infinite;
   // animation: walk .5s alternate infinite;
 
   transform-origin: center;
@@ -124,12 +125,12 @@ area:hover {
   }
   50% {
     bottom: 15%;
-    left:55%;
+    left: 55%;
     transform: scale(0.6);
   }
   100% {
     bottom: 15%;
-    left:55%;
+    left: 55%;
     transform: scale(0.6);
   }
 }
@@ -149,7 +150,7 @@ area:hover {
 @media screen and (max-width: 1000px) {
   .rooms {
     width: 90%;
-      height: 50vh;
+    height: 50vh;
   }
   .textbox {
     width: 60%;
@@ -165,5 +166,4 @@ area:hover {
     width: 90%;
   }
 }
-
 

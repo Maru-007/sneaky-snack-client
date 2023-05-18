@@ -77,37 +77,6 @@ const App = () => {
             setSocketConnection={setSocketConnection}
       />
       
-      
-      {/* <Box sx={{ width: 150, ml: "10px" }}>
-        <Stack
-          spacing={1}
-          direction="column"
-          sx={{ mb: 1 }}
-          alignItems="center"
-        >
-          <button
-            className="choiceButton"
-            onClick={() => setIsPlaying(!isPlaying)}
-          >
-            {!isPlaying ? "Play Music" : "Stop Music"}
-          </button>
-          <Slider
-            aria-label="Volume"
-            value={volume}
-            onChange={handleVolume}
-            step={10}
-            marks
-            min={0}
-            max={100}
-            color="secondary"
-          />
-        </Stack>
-      </Box>
-      <br></br>
-
-      <PlaySound isPlaying={isPlaying} doorSound={doorSound} volume={volume} /> */}
-  
-      
         <>
           
           {!isStartButtonClicked && (
