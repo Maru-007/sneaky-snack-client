@@ -23,7 +23,7 @@ const PlayerOne = ({
   const [currentRoom, setCurrentRoom] = useState("kidsroom");
   const [displayRoom, setDisplayRoom] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(20);
+  const [volume, setVolume] = useState(.2);
   const [doorSound, setDoorSound] = useState(false);
   const [item, setItem] = useState("");
   const [distract, setDistraction] = useState("");
@@ -204,10 +204,10 @@ const PlayerOne = ({
             aria-label="Volume"
             value={volume}
             onChange={handleVolume}
-            step={10}
+            step={.1}
             marks
             min={0}
-            max={100}
+            max={1}
             color="secondary"
           />
         </Stack>

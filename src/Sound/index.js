@@ -1,4 +1,6 @@
-import Sound from "react-sound";
+
+import { Howl, Howler } from 'howler';
+import { useEffect } from 'react';
 
 import background from "./audioFiles/background1.mp3";
 import door from "./audioFiles/door.mp3";
@@ -19,18 +21,6 @@ import childwin from "./audioFiles/childwin.wav";
 import lose from "./audioFiles/lose.wav";
 import negative from "./audioFiles/negative.mp3";
 import dogwin from "./audioFiles/dogwin.wav";
-import stereo from "./audioFiles/stereo.wav";
-import slam from "./audioFiles/slam.wav";
-import cologne from "./audioFiles/cologne.wav";
-import hairdryer from "./audioFiles/hairdryer.wav";
-import alarm from "./audioFiles/alarm.wav";
-import thermostat from "./audioFiles/thermostat.wav";
-import pillow from "./audioFiles/pillow.wav";
-import bowl from "./audioFiles/bowl.wav";
-import bark from "./audioFiles/bark.wav";
-import roomba from "./audioFiles/roomba.wav"
-import mouse from "./audioFiles/mouse.wav"
-import flowerpot from "./audioFiles/flowerpot.wav"
 
 const PlaySound = ({
   isPlaying,
@@ -43,118 +33,57 @@ const PlaySound = ({
   distract,
   dogDistract
 }) => {
+  useEffect(()=> {
+    
+    const sounds = {
+      background: new Howl({ src: [background], volume: volume, loop: true }),
+      door: new Howl({ src: [door], volume: .1 }),
+      backpack: new Howl({ src: [backpack], volume: .5, pos: 17 }),
+      stepstool: new Howl({ src: [stepstool], volume: .5 }),
+      slipper: new Howl({ src: [slipper], volume: .5 }),
+      umbrella: new Howl({ src: [umbrella], volume: .5 }),
+      baseballmitt: new Howl({ src: [baseballmitt], volume: .5 }),
+      remote: new Howl({ src: [remote], volume: .5 }),
+      sock: new Howl({ src: [sock], volume: .35 }),
+      toiletpaper: new Howl({ src: [toiletpaper], volume: .5 }),
+      squeakytoy: new Howl({ src: [squeakytoy], volume: .5 }),
+      shoe: new Howl({ src: [shoe], volume: .5 }),
+      flashlight: new Howl({ src: [flashlight], volume: .5 }),
+      tennisball: new Howl({ src: [tennisball], volume: .5 }),
+    };
+    isPlaying ? sounds.background.play() : sounds.background.stop();
+    doorSound ? sounds.door.play() : sounds.door.stop();
+    if (item === "backpack") sounds.backpack.play();
+    if (item === "stepstool") sounds.stepstool.play();
+    if (item === "slipper") sounds.slipper.play();
+    if (item === "umbrella") sounds.umbrella.play();
+    if (item === "baseball mitt") sounds.baseballmitt.play();
+    if (item === "remote") sounds.remote.play();
+    if (dogItem === "sock") sounds.sock.play();
+    if (dogItem === "toilet paper") sounds.toiletpaper.play();
+    if (dogItem === "squeaky toy") sounds.squeakytoy.play();
+    if (dogItem === "shoe") sounds.shoe.play();
+    if (dogItem === "flashlight") sounds.flashlight.play();
+    if (dogItem === "tennis ball") sounds.tennisball.play();
+
+
+
+
+
+
+
+
+    
+
+
+
+    return () => {
+      Howler.stop();
+    }
+  },[volume,isPlaying,doorSound, item, dogItem])
   return (
-    <div>
-      <Sound
-        url={background}
-        playStatus={isPlaying ? Sound.status.PLAYING : Sound.status.STOPPED}
-        volume={volume}
-        loop={true}
-      />
-      <Sound
-        url={door}
-        volume={volume}
-        playStatus={doorSound ? Sound.status.PLAYING : Sound.status.STOPPED}
-      />
-      {item === "backpack" && (
-        <Sound
-          url={backpack}
-          playStatus={Sound.status.PLAYING}
-          volume={100}
-          playFromPosition={17000}
-        />
-      )}
-      {item === "stepstool" && (
-        <Sound url={stepstool} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {item === "slipper" && (
-        <Sound url={slipper} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {item === "umbrella" && (
-        <Sound url={umbrella} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {item === "baseball mitt" && (
-        <Sound
-          url={baseballmitt}
-          playStatus={Sound.status.PLAYING}
-          volume={35}
-        />
-      )}
-      {item === "remote" && (
-        <Sound url={remote} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogItem === "sock" && (
-        <Sound url={sock} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogItem === "toilet paper" && (
-        <Sound
-          url={toiletpaper}
-          playStatus={Sound.status.PLAYING}
-          volume={35}
-        />
-      )}
-      {dogItem === "squeaky toy" && (
-        <Sound url={squeakytoy} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogItem === "shoe" && (
-        <Sound url={shoe} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogItem === "flashlight" && (
-        <Sound url={flashlight} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogItem === "tennis ball" && (
-        <Sound url={tennisball} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {winState && (
-        <>
-          <Sound url={win} playStatus={Sound.status.PLAYING} volume={35} />
-          <Sound url={childwin} playStatus={Sound.status.PLAYING} volume={35} />
-          <Sound url={dogwin} playStatus={Sound.status.PLAYING} volume={35} />
-        </>
-      )}
-      {loseState && (
-        <>
-          <Sound url={lose} playStatus={Sound.status.PLAYING} volume={35} />
-          <Sound url={negative} playStatus={Sound.status.PLAYING} volume={35} />
-        </>
-      )}
-      {distract === "stereo" && (
-        <Sound url={stereo} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {distract === "slam" && (
-        <Sound url={slam} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {distract === "cologne" && (
-        <Sound url={cologne} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-       {distract === "hairdryer" && (
-        <Sound url={hairdryer} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {distract === "alarm" && (
-        <Sound url={alarm} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {distract === "thermostat" && (
-        <Sound url={thermostat} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogDistract === "pillow" && (
-        <Sound url={pillow} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-       {dogDistract === "bowl" && (
-        <Sound url={bowl} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-         {dogDistract === "murderers" && (
-        <Sound url={bark} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-      {dogDistract === "roomba" && (
-        <Sound url={roomba} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-        {dogDistract === "mouse" && (
-        <Sound url={mouse} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-        {dogDistract === "flower pot" && (
-        <Sound url={flowerpot} playStatus={Sound.status.PLAYING} volume={35} />
-      )}
-    </div>
+    <div></div>
+   
   );
 };
 

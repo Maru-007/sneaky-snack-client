@@ -21,7 +21,7 @@ const PlayerTwo = ({
   const [dogMessage, setDogMessage] = useState("");
   const [dogCurrentRoom, setDogCurrentRoom] = useState("kidsroom");
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(20);
+  const [volume, setVolume] = useState(0.2);
   const [doorSound, setDoorSound] = useState(false);
   const [dogItem, setDogItem] = useState("");
   const [displayRoom, setDisplayRoom] = useState(false);
@@ -193,10 +193,10 @@ const PlayerTwo = ({
             aria-label="Volume"
             value={volume}
             onChange={handleVolume}
-            step={10}
+            step={0.1}
             marks
             min={0}
-            max={100}
+            max={1.0}
             color="secondary"
           />
         </Stack>
