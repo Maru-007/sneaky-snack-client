@@ -55,7 +55,7 @@ const PlayerOne = ({
       setChoices(question.choices);
       console.log(question);
       console.log(question.choices);
-      if (question.message.includes("You win!")) {
+      if (question.message?.includes("You win!")) {
         setWinState(true);
         setTimeout(() => {
           setWinState(false);
