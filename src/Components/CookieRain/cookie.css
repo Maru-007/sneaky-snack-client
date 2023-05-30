@@ -1,0 +1,34 @@
+.cookie-rain-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .cookie {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-image: url('path/to/cookie-image.jpg');
+    background-size: cover;
+    animation: cookie-rain 4s linear infinite;
+  }
+  
+  @keyframes cookie-rain {
+    0% {
+      top: -100px;
+      opacity: 0;
+      transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      top: 100vh;
+      opacity: 0;
+      transform: translateX(-50%) rotate(360deg);
+    }
+  }
+  
