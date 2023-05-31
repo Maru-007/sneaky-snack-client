@@ -169,6 +169,7 @@ const PlayerOne = ({
 
     if(choice === "Play Again"){
       setCurrentRoom("kidsroom");
+      socket.emit(EVENT_NAMES.childReady)
     }
   };
 
