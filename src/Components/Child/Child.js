@@ -16,7 +16,7 @@ const PlayerOne = ({
   handleLoading,
   socket,
 }) => {
-  const [isConnected, setIsConnected] = useState(false);
+  // const [isConnected, setIsConnected] = useState(false);
   const [question, setQuestion] = useState("");
   const [choices, setChoices] = useState([]);
   const [message, setMessage] = useState("");
@@ -33,14 +33,14 @@ const PlayerOne = ({
   console.log(socket);
   useEffect(() => {
     function handleConnect() {
-      setIsConnected(true);
+      // setIsConnected(true);
       console.log("handleConnect has been triggered");
       setQuestion("");
       setChoices([]);
     }
 
     function handleDisconnect() {
-      setIsConnected(false);
+      // setIsConnected(false);
       console.log("handleDisconnect has been triggered");
       setQuestion("");
       setChoices([]);
@@ -150,7 +150,7 @@ const PlayerOne = ({
       socket.off("disconnect", handleDisconnect);
       socket.off("response", () => console.log("response listener is off"));
     };
-  }, []);
+  }, [socket]);
 
   const handleChildChoice = (choice) => {
     setMessage("");

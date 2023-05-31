@@ -15,7 +15,7 @@ const PlayerTwo = ({
   handleLoading,
   socket,
 }) => {
-  const [dogIsConnected, setDogIsConnected] = useState(false);
+  // const [dogIsConnected, setDogIsConnected] = useState(false);
   const [dogQuestion, setDogQuestion] = useState("");
   const [dogChoices, setDogChoices] = useState([]);
   const [dogMessage, setDogMessage] = useState("");
@@ -132,13 +132,13 @@ const PlayerTwo = ({
       socket.off("dogDisconnect", handleDogDisconnect);
       socket.off("response", () => console.log("response listener is off"));
     };
-  }, []);
+  }, [dogChoices, dogMessage, dogQuestion, socket]);
   function handleDogConnect() {
-    setDogIsConnected(true);
+    // setDogIsConnected(true);
   }
 
   function handleDogDisconnect() {
-    setDogIsConnected(false);
+    // setDogIsConnected(false);
     setDogQuestion("");
     setDogChoices([]);
   }

@@ -1,26 +1,12 @@
 import React, { useState } from "react";
 
-import { EVENT_NAMES } from "./utils";
 import "./App.scss";
-import bannerImage from "./Banner.png";
 
 import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
 import PlayerOne from "./Components/Child/Child";
 import PlayerTwo from "./Components/Dog/Dog"
-import Room from "./Room";
 
-// import PlaySound from "./Sound";
-// import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import TypingComponent from "./Typewriter";
 import Lobby from "./Components/Lobby"
-import { socket } from "./socket";
-// import Stack from "@mui/material/Stack";
-// import Slider from "@mui/material/Slider";
-// import Typewriter from "typewriter-effect";
-// import VolumeDown from "@mui/icons-material/VolumeDown";
-// import VolumeUp from "@mui/icons-material/VolumeUp";
-
 
 const rooms = [
   "kidsroom",
@@ -34,9 +20,7 @@ const rooms = [
 
 const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
-  // const [isPlaying, setIsPlaying] = useState(false);
-  // const [doorSound, setDoorSound] = useState(false);
-  const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
+  // const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
   // const [volume, setVolume] = useState(20);
   const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([])
@@ -79,13 +63,6 @@ const App = () => {
       
         <>
           
-          {!isStartButtonClicked && (
-            <div className="startbtn">
-              {/* <button className="choiceButton" onClick={handleReady}>
-                Start
-              </button> */}
-            </div>
-          )}
         </>
         { selectedPlayers.includes('child') && playerOne ?
           <PlayerOne 
@@ -116,7 +93,7 @@ const App = () => {
   
       
       {/* loading indicator */}
-      {loading === true && isStartButtonClicked === true ? (
+      {loading === true ? (
         <div className="loading">
           <img className="spinner" src={loadingSpinner} alt="loading" />
           <p>Loading...</p>
