@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./App.scss";
 
-import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
+// import loadingSpinner from "./assets/rainbow-spinner-loading.gif"
 import PlayerOne from "./Components/Child/Child";
 import PlayerTwo from "./Components/Dog/Dog"
 
@@ -22,7 +22,7 @@ const App = () => {
   const [viewBanner, setViewBanner] = useState(true);
   // const [isStartButtonClicked, setIsStartButtonClicked] = useState(false);
   // const [volume, setVolume] = useState(20);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [socketConnection, setSocketConnection] = useState([])
   // const [player, setPlayer] = useState("Melis");
   const [selectedPlayers, setSelectedPlayers] = useState([]);
@@ -31,7 +31,7 @@ const App = () => {
   };
   console.log(socketConnection)
   const handleLoading = () => {
-    setLoading(false);
+    // setLoading(false);
   };
   let playerOne;
   let playerTwo;
@@ -93,14 +93,14 @@ const App = () => {
   
       
       {/* loading indicator */}
-      {loading === true ? (
+      {/* {loading === true ? (
         <div className="loading">
           <img className="spinner" src={loadingSpinner} alt="loading" />
           <p>Loading...</p>
         </div>
       ) : (
         <></>
-      )}
+      )} */}
     </div>
   );
 };

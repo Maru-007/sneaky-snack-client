@@ -61,7 +61,7 @@ const PlayerOne = ({
           setWinState(false);
         }, 3000);
       }
-      if (question.message.includes("You lose!")) {
+      if (question.message?.includes("You lose!")) {
         setLoseState(true);
         setTimeout(() => {
           setLoseState(false);
