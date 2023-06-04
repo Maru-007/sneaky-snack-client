@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import PlaySound from "../../Sound/index";
 import TypingComponent from "../../Typewriter";
-// import loadingSpinner from "../../assets/rainbow-spinner-loading.gif";
+import loadingSpinner from "../../assets/rainbow-spinner-loading.gif";
 
 const PlayerOne = ({
   rooms,
@@ -32,7 +32,7 @@ const PlayerOne = ({
   const [winState, setWinState] = useState(false);
   const [loseState, setLoseState] = useState(false);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   console.log(socket);
   useEffect(() => {
@@ -182,6 +182,8 @@ const PlayerOne = ({
     if (choice === "Play Again") {
       setCurrentRoom("kidsroom");
     }
+
+    if (choice === "Yes") setLoading(true);
   };
 
   const handleNav = (room) => {
@@ -301,14 +303,14 @@ const PlayerOne = ({
       </div>
 
       {/* loading indicator */}
-      {/* {loading === true ? (
+      {loading === true ? (
         <div className="loading">
           <img className="spinner" src={loadingSpinner} alt="loading" />
           <p>Loading...</p>
         </div>
       ) : (
         <></>
-      )} */}
+      )}
     </div>
   );
 };
